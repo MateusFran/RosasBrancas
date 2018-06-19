@@ -14,11 +14,12 @@ public class ScriptGeral : MonoBehaviour {
 	public InicioDatilografia inicioDatilografia;
 	public ObjetoDatilografia objetoDatilografia;
 
+    //Outros Scripts;
     public Timer timer;
-    
-    //outros códigos;
 	public Player player;
     public CutScenes cutScene;
+
+    public Cap1Part1 cap1Part1;
 
 	public Animator telaPreta;
 
