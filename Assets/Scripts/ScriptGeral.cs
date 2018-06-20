@@ -162,6 +162,8 @@ public class ScriptGeral : MonoBehaviour {
     {
         telaPreta.SetTrigger("fadeOut");
         hudFinal.SetActive(true);
+        cutScene.rodarCena(1, 6);
+
     }
     private void Cap2part1()
     {

@@ -18,6 +18,8 @@ public class CutScenes : MonoBehaviour {
     public InicioDatilografia inicioDatilografia;
     public ObjetoDatilografia objetoDatilografia;
 
+    public Personagem personagem;
+
     //ativar/desabilitar objetos do hud;
     public GameObject hudDialogo;
     public GameObject hudDialogoInicial;
@@ -84,7 +86,11 @@ public class CutScenes : MonoBehaviour {
     }
     private IEnumerator Cap1_cena6()
     {
-        yield return new WaitForSeconds(1f);
+
+        yield return new WaitForSeconds(0.5f);
+
+        telaPreta.SetTrigger("fadeIn");
+        personagem.Chamar("Pai", 4.5f, -10.75f);
     }
 
 }
