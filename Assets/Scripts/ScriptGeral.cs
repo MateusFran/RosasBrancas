@@ -116,7 +116,6 @@ public class ScriptGeral : MonoBehaviour {
             {
                 Cap2part1();
             }
-            print("rodarParte is True");
             PlayerPrefs.SetInt("rodarParte", 0);
         }//fim rodarParte
     }
@@ -158,6 +157,7 @@ public class ScriptGeral : MonoBehaviour {
     }
     private void Cap1part6()
     {
+        telaPreta.SetTrigger("fadeOut");
         hudFinal.SetActive(true);
     }
     private void Cap2part1()
