@@ -90,6 +90,7 @@ public class Datilografia : MonoBehaviour {
 		hud.SetActive (false);
 		PlayerPrefs.SetInt ("objetoDialogo", 1);
 		PlayerPrefs.SetInt ("rodarParte", 1);
+        
 
 		acabouFala = true;
 		letras = texto.ToCharArray ();

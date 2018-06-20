@@ -1,4 +1,4 @@
-﻿    using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -150,6 +150,7 @@ public class Player : MonoBehaviour {
             PlayerPrefs.SetInt("rodarCap1Part5", 1);
             PlayerPrefs.SetInt("VasculhouObjetos", 0);
 
+            print("Vasculhou...");
 
             PlayerPrefs.SetInt("rodarParte", 1);
         }
@@ -383,8 +384,11 @@ public class Player : MonoBehaviour {
                     hudDialogo.SetActive(true);
                     objetoDatilografia.Digitando("Dialogo\\Objetos\\Camera\\2_Vez.txt");
 
+                    podeRodarParte = true;
+
                     cameraVez++;
                     scriptGeral.parte++;
+                    print(scriptGeral.parte);
                 }
                 else
                 {

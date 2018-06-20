@@ -36,7 +36,8 @@ public class ScriptGeral : MonoBehaviour {
     //cenários;
     public GameObject bedroom;
     public GameObject redroom;
-    
+
+    //Testes;
 
 	void Start () {
 
@@ -47,8 +48,8 @@ public class ScriptGeral : MonoBehaviour {
         PlayerPrefs.SetInt("rodarParte", 1);
         PlayerPrefs.SetInt("escolha", 0);
         PlayerPrefs.SetInt("rodarCap1Part5", 0);
-
         #endregion
+
 
         //Desabilitando objetos canvas;
         hudEscolhas.SetActive (false);
@@ -109,8 +110,10 @@ public class ScriptGeral : MonoBehaviour {
             }
             else if (capitulo == 1 && parte == 6)
             {
-                
-                Cap1part6();
+                if (objetoDatilografia.acabouFala)
+                {
+                    Cap1part6();
+                }
             }
             else
             {
@@ -173,6 +176,7 @@ public class ScriptGeral : MonoBehaviour {
         if ((capitulo == 1 && parte == 5) && objetoDatilografia.acabouFala)
         {
             PlayerPrefs.SetInt("rodarParte", 1);
+            print("rodouParte5...");
         }
     }
 
