@@ -25,6 +25,9 @@ public class Datilografia : MonoBehaviour {
 				controle_space = false, 
 				acabouFala;
 
+    //outros Scripsts;
+    public Player player;
+
 	void Start(){
 
 	}
@@ -56,6 +59,7 @@ public class Datilografia : MonoBehaviour {
 		falas = texto.Split ('@');
 
 		acabouFala = false;
+        player.podeApertarE = false;
 
 		for (int l = 0; l < falas.Length; l++) {
 
@@ -90,8 +94,8 @@ public class Datilografia : MonoBehaviour {
 		hud.SetActive (false);
 		PlayerPrefs.SetInt ("objetoDialogo", 1);
 		PlayerPrefs.SetInt ("rodarParte", 1);
-        
 
+        player.podeApertarE = true;
 		acabouFala = true;
 		letras = texto.ToCharArray ();
 	}

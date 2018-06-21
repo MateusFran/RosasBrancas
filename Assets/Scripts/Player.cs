@@ -388,7 +388,6 @@ public class Player : MonoBehaviour {
 
                     cameraVez++;
                     scriptGeral.parte++;
-                    print(scriptGeral.parte);
                 }
                 else
                 {
@@ -431,7 +430,13 @@ public class Player : MonoBehaviour {
         relogioVez = vezValor;
         tapeteVez = vezValor;
     }
-
+    public void ResetarVezesVaculhouRedroom(int vezValor)
+    {
+        portaRedroomVez = vezValor;
+        relogioVez = vezValor;
+        quadroVez = vezValor;
+        mesaVez = vezValor;
+    }
     public void VerificarRodarProximaParte() {
 
         if (podeRodarParte && objetoDatilografia.acabouFala)

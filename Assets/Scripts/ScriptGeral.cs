@@ -18,7 +18,7 @@ public class ScriptGeral : MonoBehaviour {
     public Timer timer;
 	public Player player;
     public CutScenes cutScene;
-
+    public Choices escolha;
     public Cap1Part1 cap1Part1;
 
 	public Animator telaPreta;
@@ -33,10 +33,13 @@ public class ScriptGeral : MonoBehaviour {
 
     public GameObject hudFinal;
 
+    public GameObject objetoPlayer;
+
     //cenários;
     public GameObject bedroom;
     public GameObject redroom;
 
+    private GameObject objetoDelay;
     //Testes;
 
 	void Start () {
@@ -62,6 +65,9 @@ public class ScriptGeral : MonoBehaviour {
 	}//fim start;
 
 	void Update () {
+
+        escolhaAtual = PlayerPrefs.GetInt("escolha");
+
         //verifica qual capítulo rodar;
         RodarCapituloParte();
 
@@ -100,7 +106,7 @@ public class ScriptGeral : MonoBehaviour {
                     Cap1part5();
 
                     hudTempo.SetActive(true);
-                    timer.ComecarTempo(30f);
+                    //timer.ComecarTempo(15f);
 
                     player.cenaObjetos = 1;
                     
@@ -112,8 +118,30 @@ public class ScriptGeral : MonoBehaviour {
             {
                 if (objetoDatilografia.acabouFala)
                 {
+                    //timer.PararTempo();
+                    cutScene.rodarCena(1, 6);
                     Cap1part6();
                 }
+            }
+            else if (capitulo == 1 && parte == 7)
+            {
+                hudTelaPreta.SetActive(false);
+                hudEscolhas.SetActive(true);
+                escolha.SetarEscolhas("Sair", "Não sair");
+                parte++;
+            }
+            else if (capitulo == 1 && parte == 8 && escolhaAtual == 1)
+            {
+                hudDialogo.SetActive(true);
+                cutScene.rodarCena(1, 8);
+            }
+            else if (capitulo == 1 && parte == 8 && escolhaAtual == 2)
+            {
+                hudDialogo.SetActive(true);
+
+                hudTelaPreta.SetActive(true);
+                hudEscolhas.SetActive(false);
+                datilografia.Digitando("Dialogo\\Cap1_pt8_Esc2.txt");
             }
             else
             {

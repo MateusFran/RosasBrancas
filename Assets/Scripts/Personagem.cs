@@ -34,10 +34,10 @@ public class Personagem : MonoBehaviour {
     }
     private void SetarPosicao(GameObject objeto, float posX, float posY)
     {
-        Vector3 posicaoInicialCena = objeto.transform.position;
-        posicaoInicialCena.x = posX;
-        posicaoInicialCena.y = posY;
-        objeto.transform.position = posicaoInicialCena;
+        Vector3 posicaoCena = objeto.transform.position;
+        posicaoCena.x = posX;
+        posicaoCena.y = posY;
+        objeto.transform.position = posicaoCena;
     }
 	// Update is called once per frame
 	void Update () {

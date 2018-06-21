@@ -7,7 +7,7 @@ public class Timer : MonoBehaviour {
 
     [SerializeField]
     private float time;
-
+    private bool jaVerificou;
     public bool acabouTempo;
 
     [SerializeField]
@@ -15,10 +15,18 @@ public class Timer : MonoBehaviour {
 
     public Text tempoEmTexto;
 
-
+    private void Start()
+    {
+        acabouTempo = true;
+        jaVerificou = true;
+    }
     public void ComecarTempo(float tempoDefinido)
     {
         time = tempoDefinido;
+    }
+    public void PararTempo()
+    {
+        time = 0;
     }
     void Update()
     {
@@ -26,12 +34,16 @@ public class Timer : MonoBehaviour {
         {
             time -= Time.deltaTime;
             tempoEmTexto.text = time.ToString("00");
+            acabouTempo = false;
         }
         
-        if(time <= 0)
+        if(time <= 0 && jaVerificou)
         {
+            //PlayerPrefs.SetInt("rodarParte", 1);
             acabouTempo = true;
             hud.SetActive(false);
+
+            jaVerificou = false;
         }
     }
 }

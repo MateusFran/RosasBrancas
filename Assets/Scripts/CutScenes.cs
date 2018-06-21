@@ -8,6 +8,7 @@ public class CutScenes : MonoBehaviour {
     public bool acabouCena;
 
     public Player player;
+    public GameObject objetoPlayer;
 
     public ScriptGeral scriptGeral;
 
@@ -87,10 +88,25 @@ public class CutScenes : MonoBehaviour {
     private IEnumerator Cap1_cena6()
     {
 
-        yield return new WaitForSeconds(0.5f);
-
+        yield return new WaitForSeconds(1f);
+        personagem.Chamar("Pai", -5f, -1.4f);
+        objetoPlayer.SetActive(false);
         telaPreta.SetTrigger("fadeIn");
-        personagem.Chamar("Pai", 4.5f, -10.75f);
+
+        player.ResetarVezesVaculhouRedroom(2);
+        yield return new WaitForSeconds(0.5f);
+        hudDialogo.SetActive(true);
+        datilografia.Digitando("Dialogo\\Cap1_pt6.txt");
+        scriptGeral.parte++;
+    }
+    private IEnumerator Cap1_cena8()
+    {
+        yield return new WaitForSeconds(0.5f);
+        objetoPlayer.SetActive(true);
+
+        hudTelaPreta.SetActive(true);
+        hudEscolhas.SetActive(false);
+        datilografia.Digitando("Dialogo\\Cap1_pt8_Esc1.txt");
     }
 
 }
