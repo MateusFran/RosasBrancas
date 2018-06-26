@@ -19,7 +19,6 @@ public class ScriptGeral : MonoBehaviour {
 	public Player player;
     public CutScenes cutScene;
     public Choices escolha;
-    public Cap1Part1 cap1Part1;
 
 	public Animator telaPreta;
 

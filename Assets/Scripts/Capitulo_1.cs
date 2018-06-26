@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cap1Part1 : MonoBehaviour {
+public class Capitulo_1 : BaseCapitulo {
 
-    public void comecar()
-    {
 
-    }
+
+	// Use this for initialization
+	void Start () {
+        
+	}
+	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 }
