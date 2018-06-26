@@ -28,6 +28,7 @@ public class ObjetoDatilografia : MonoBehaviour {
 	public GameObject hud;
 
 	public Player scriptPlayer;
+    public Capitulo_1 capitulo1;
 
 	// Update is called once per frame
 	void Update () {
@@ -92,6 +93,7 @@ public class ObjetoDatilografia : MonoBehaviour {
 		}
 
 		PlayerPrefs.SetInt ("objetoDialogo", 1);
+        capitulo1.RodarEvento = true;
 
 		hud.SetActive (false);
 		acabouFala = true;

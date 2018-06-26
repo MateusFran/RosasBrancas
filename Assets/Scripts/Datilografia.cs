@@ -28,6 +28,8 @@ public class Datilografia : MonoBehaviour {
     //outros Scripsts;
     public Player player;
 
+    public Capitulo_1 capitulo1;
+
 	void Start(){
 
 	}
@@ -53,7 +55,7 @@ public class Datilografia : MonoBehaviour {
 	}
 
 
-	IEnumerator Typerwrite(){
+	private IEnumerator Typerwrite(){
 
 		texto.Replace ("\r\n", "");
 		falas = texto.Split ('@');
@@ -93,7 +95,9 @@ public class Datilografia : MonoBehaviour {
 		}
 		hud.SetActive (false);
 		PlayerPrefs.SetInt ("objetoDialogo", 1);
-		PlayerPrefs.SetInt ("rodarParte", 1);
+
+        //capitulos;
+        capitulo1.RodarEvento = true;
 
         player.podeApertarE = true;
 		acabouFala = true;

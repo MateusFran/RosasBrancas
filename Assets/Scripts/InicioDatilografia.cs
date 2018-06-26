@@ -24,6 +24,8 @@ public class InicioDatilografia : MonoBehaviour {
 	            controle_space = false, 
 				acabouFala = true;
 
+    public Capitulo_1 capitulo1;
+
 	void Start()
 	{
 
@@ -89,7 +91,8 @@ public class InicioDatilografia : MonoBehaviour {
 		}
 
 		PlayerPrefs.SetInt ("objetoDialogo", 1);
-		PlayerPrefs.SetInt ("rodarParte", 1);
+
+        capitulo1.RodarEvento = true;
 
 		hud.SetActive (false);
 

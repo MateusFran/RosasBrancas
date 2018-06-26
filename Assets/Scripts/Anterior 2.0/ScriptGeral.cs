@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ScriptGeral : MonoBehaviour {
+
 	//Variaveis:
 	public int escolhaAtual;
 	public bool continueRoteiro, rodarParte = true;
@@ -41,6 +42,7 @@ public class ScriptGeral : MonoBehaviour {
     private GameObject objetoDelay;
     //Testes;
 
+    /*
 	void Start () {
 
         //valores inicais de variaveis;
@@ -62,6 +64,7 @@ public class ScriptGeral : MonoBehaviour {
 
 
 	}//fim start;
+    */
 
 	void Update () {
 
@@ -115,11 +118,13 @@ public class ScriptGeral : MonoBehaviour {
             }
             else if (capitulo == 1 && parte == 6)
             {
-                if (objetoDatilografia.acabouFala)
+                bool jaRodou6 = false;
+                if (objetoDatilografia.acabouFala && !jaRodou6)
                 {
                     //timer.PararTempo();
                     cutScene.rodarCena(1, 6);
                     Cap1part6();
+                    jaRodou6 = true;
                 }
             }
             else if (capitulo == 1 && parte == 7)
@@ -156,7 +161,8 @@ public class ScriptGeral : MonoBehaviour {
     private void Cap1part1(){
 
 		hudTelaPreta.SetActive (true);
-		inicioDatilografia.Digitando ("Dialogo\\Cap1_pt1.txt");
+        //Datilografia("Cap1.txt");
+            //Cap1_pt1.txt");
 		parte++;
 
 	}//fim Cap1_part1;

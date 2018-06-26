@@ -415,13 +415,13 @@ public class Player : MonoBehaviour {
 	public void PararPlayer(){
 		speed = 0;
 		mover = false;
-		Debug.Log ("parou player");
+		//Debug.Log ("parou player");
 	}
 
 	public void AndarPlayer(){
 		speed = speed_natural;
 		mover = true;
-		Debug.Log ("ande player");
+		//Debug.Log ("ande player");
 	}
     public void ResetarVezesVasculhouBedroom(int vezValor)
     {
@@ -443,7 +443,7 @@ public class Player : MonoBehaviour {
         {
             PlayerPrefs.SetInt("rodarParte", 1);
             podeRodarParte = false;
-            print("RodarParte");
+            //print("RodarParte");
         }
     }
     private void VerificarVasculhar()
