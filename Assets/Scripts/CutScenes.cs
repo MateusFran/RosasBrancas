@@ -93,7 +93,7 @@ public class CutScenes : MonoBehaviour {
         objetoPlayer.SetActive(false);
         telaPreta.SetTrigger("fadeIn");
 
-        player.ResetarVezesVaculhouRedroom(2);
+        
         yield return new WaitForSeconds(0.5f);
         hudDialogo.SetActive(true);
         datilografia.Digitando("Dialogo\\Cap1_pt6.txt");

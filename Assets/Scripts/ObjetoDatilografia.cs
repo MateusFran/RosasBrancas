@@ -82,7 +82,7 @@ public class ObjetoDatilografia : MonoBehaviour {
 
 			while (Input.GetKeyDown (KeyCode.Space) == false) {
 				controle_space = false;
-				yield return new WaitForSeconds (0.01f);
+				yield return new WaitForSeconds (0.005f);
 				space_hud.text = "Aperte Espaço";
 			}
 			texto_hud.text = "";

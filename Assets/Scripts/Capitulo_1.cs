@@ -53,7 +53,7 @@ public class Capitulo_1 : BaseCapitulo {
             else if (RodarEvento && Evento == 4)
             {
                 player.PararPlayer();
-                player.ResetarVezesVasculhouBedroom(1);
+                player.ResetarVezesVasculhou("Bedroom", 1);
             }
             else
             {

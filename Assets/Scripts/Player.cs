@@ -4,54 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour {
+public class Player : BasePlayer {
 
-	public Rigidbody2D rb;
 
-	[SerializeField]
-	private float speed;
-
-    private bool podeRodarParte;
-
-	public float speed_natural;
-    public bool mover;
-    private bool facingright = true;
-
-    private Animator animacao;
-
-	//variaveis de vez dos objetos;
-	public int  armarioVez, 
-				portaBedroomVez, 
-				tapeteVez, 
-				relogioVez;
-
-    public int mesaVez,
-               portaRedroomVez,
-               cameraVez,
-               quadroVez;
-                
-
-	//variaveis tecla E;
-	public Image imagemTecla;
-	public Sprite[] teclaE;
-
-	public bool vasculhando, 
-				apertarTeclaE,
-				podeApertarE;
-
-    public int cenaObjetos;
-
-	//outros script;
-	public Datilografia datilografia;
-	public InicioDatilografia inicioDatilografia;
-	public ObjetoDatilografia objetoDatilografia;
-
-    public ScriptGeral scriptGeral;
-
-	public Inventory objeto;
-
-	//gameobjects;
-	public GameObject hudDialogo;
 
     void Start()
     {
@@ -63,17 +18,13 @@ public class Player : MonoBehaviour {
         //configurações iniciais;
         cenaObjetos = 0;
 		podeApertarE = true;
-        podeRodarParte = false;
 
         datilografia.acabouFala = true;
         objetoDatilografia.acabouFala = true;
         inicioDatilografia.acabouFala = true;
 
-		//vezes que verificou
-		armarioVez = 0;
-		portaBedroomVez = 0;
-		relogioVez = 0;
-		tapeteVez = 0;
+        //vezes que verificou
+        ResetarVezesVasculhou("Bedroom", 0);
 
 		rb = GetComponent<Rigidbody2D> ();
         animacao = GetComponent<Animator>();
@@ -91,10 +42,9 @@ public class Player : MonoBehaviour {
         VerificarTeclaE();
         VerificarVasculhar();
         VerificarFalaAcabou();
-        VerificarRodarProximaParte();
 	}
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
 
 		float move = Input.GetAxisRaw ("Horizontal");
@@ -245,7 +195,7 @@ public class Player : MonoBehaviour {
 					portaBedroomVez++;
                     PlayerPrefs.SetInt("chave", 0);
 
-                    podeRodarParte = true;
+                    capitulo1.RodarEvento = true;
 
 
 				}
@@ -384,10 +334,8 @@ public class Player : MonoBehaviour {
                     hudDialogo.SetActive(true);
                     objetoDatilografia.Digitando("Dialogo\\Objetos\\Camera\\2_Vez.txt");
 
-                    podeRodarParte = true;
-
                     cameraVez++;
-                    scriptGeral.parte++;
+                    //scriptGeral.parte++;
                 }
                 else
                 {
@@ -411,39 +359,42 @@ public class Player : MonoBehaviour {
 	}
 
 
+    #region Funções Importantes
+    //pensando...
+    private void VasculharObjeto(string nomeObjeto, int vezObjeto, int cenaObjetos)
+    {
+        if (gameObject)
+        {
 
-	public void PararPlayer(){
+        }
+    }
+
+    public void PararPlayer(){
 		speed = 0;
 		mover = false;
-		//Debug.Log ("parou player");
 	}
-
 	public void AndarPlayer(){
 		speed = speed_natural;
 		mover = true;
-		//Debug.Log ("ande player");
 	}
-    public void ResetarVezesVasculhouBedroom(int vezValor)
+    public void ResetarVezesVasculhou(string cenario, int vezValor)
     {
-        portaBedroomVez = vezValor;
-        armarioVez = vezValor;
-        relogioVez = vezValor;
-        tapeteVez = vezValor;
-    }
-    public void ResetarVezesVaculhouRedroom(int vezValor)
-    {
-        portaRedroomVez = vezValor;
-        relogioVez = vezValor;
-        quadroVez = vezValor;
-        mesaVez = vezValor;
-    }
-    public void VerificarRodarProximaParte() {
-
-        if (podeRodarParte && objetoDatilografia.acabouFala)
+        if (cenario == "Bedroom") {
+            portaBedroomVez = vezValor;
+            armarioVez = vezValor;
+            relogioVez = vezValor;
+            tapeteVez = vezValor;
+        }
+        else if (cenario == "Redroom")
         {
-            PlayerPrefs.SetInt("rodarParte", 1);
-            podeRodarParte = false;
-            //print("RodarParte");
+            portaRedroomVez = vezValor;
+            relogioVez = vezValor;
+            quadroVez = vezValor;
+            mesaVez = vezValor;
+        }
+        else
+        {
+            print("Nenhum valor resetado...");
         }
     }
     private void VerificarVasculhar()
@@ -462,7 +413,6 @@ public class Player : MonoBehaviour {
 
     private void VerificarTeclaE()
     {
-
         if (Input.GetKeyDown(KeyCode.E) && podeApertarE == true)
         {
             apertarTeclaE = true;
@@ -472,6 +422,8 @@ public class Player : MonoBehaviour {
             apertarTeclaE = false;
         }
     }
+
+    #endregion
 }//fim
 
 

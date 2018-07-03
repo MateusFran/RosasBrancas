@@ -182,8 +182,6 @@ public class ScriptGeral : MonoBehaviour {
     {
         //configurações do player;
         player.PararPlayer();
-        player.ResetarVezesVasculhouBedroom(1);
-
         cutScene.rodarCena(1, 4);
         parte++;
     }
