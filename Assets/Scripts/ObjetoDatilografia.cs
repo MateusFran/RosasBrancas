@@ -8,17 +8,13 @@ public class ObjetoDatilografia : MonoBehaviour {
 
     //variaveis importantes;
     private string texto;
-
 	private char[] letras;
 	private string[] falas;
-
-
 	public Text texto_hud, 
 				nomepersonagem_hud, 
 				space_hud;
 
 	public float delay;
-
     public bool nomepersonagem = true,
                 pulardelay = false,
                 controle_space = false,
@@ -26,11 +22,9 @@ public class ObjetoDatilografia : MonoBehaviour {
 
 	//outros objetos
 	public GameObject hud;
-
 	public Player scriptPlayer;
     public Capitulo_1 capitulo1;
-
-	// Update is called once per frame
+	
 	void Update () {
 
 		if (Input.GetKeyDown (KeyCode.Space)) {
@@ -93,7 +87,7 @@ public class ObjetoDatilografia : MonoBehaviour {
 		}
 
 		PlayerPrefs.SetInt ("objetoDialogo", 1);
-        capitulo1.RodarEvento = true;
+		capitulo1.RodarEvento = true;
 
 		hud.SetActive (false);
 		acabouFala = true;

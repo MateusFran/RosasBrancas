@@ -4,9 +4,53 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Player : BasePlayer {
+public class Player : MonoBehaviour {
+    
+     #region Variáveis
+
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private float speed;
+    public float speed_natural;
+    public bool mover;
+    [SerializeField] private bool podeMover;
+    private bool facingright = true;
+
+    private Animator animacao;
+
+    //variaveis de vez dos objetos;
+    public int armarioVez,
+                portaBedroomVez,
+                tapeteVez,
+                relogioVez;
+
+    public int mesaVez,
+               portaRedroomVez,
+               cameraVez,
+               quadroVez;
 
 
+    //variaveis tecla E;
+    public Image imagemTecla;
+    public Sprite[] teclaE;
+
+    public bool vasculhando,
+                apertarTeclaE,
+                podeApertarE;
+
+    public int cenaObjetos;
+
+    //outros script;
+    public Datilografia datilografia;
+    public InicioDatilografia inicioDatilografia;
+    public ObjetoDatilografia objetoDatilografia;
+
+    //gameobjects;
+    public GameObject hudDialogo;
+
+     //Capitulos;
+    public Capitulo_1 capitulo1;
+
+    #endregion 
 
     void Start()
     {
@@ -19,59 +63,46 @@ public class Player : BasePlayer {
         cenaObjetos = 0;
 		podeApertarE = true;
 
+        podeMover = true;
         datilografia.acabouFala = true;
         objetoDatilografia.acabouFala = true;
         inicioDatilografia.acabouFala = true;
+
+        mover = true;
 
         //vezes que verificou
         ResetarVezesVasculhou("Bedroom", 0);
 
 		rb = GetComponent<Rigidbody2D> ();
         animacao = GetComponent<Animator>();
-
-		mover = true;
     }
 
 	void Update(){
-
         //Verifica se vasculhou todos os objetos da cena;
         VerificarObjetosRedroom(1);
-
 
         //Métodos;
         VerificarTeclaE();
         VerificarVasculhar();
         VerificarFalaAcabou();
 	}
-
+    /* 
+    private void OnTriggerEnter2D(Collider2D other) {
+        SceneManager.LoadScene("nomeDaCena");
+    }
+    */
     private void FixedUpdate()
     {
-
 		float move = Input.GetAxisRaw ("Horizontal");
 		rb.velocity = new Vector2 (move * speed, rb.velocity.y);
 		if (mover) {
 			animacao.SetFloat ("Andando_Player", Mathf.Abs (move));
-
 			if (move > 0 && !facingright)
 				flip ();
 			else if (move < 0 && facingright)
 				flip ();
 		}
     }
-    private void VerificarFalaAcabou()
-    {
-        //verifica se a fala acabou;
-        if (!datilografia.acabouFala || !inicioDatilografia.acabouFala || !objetoDatilografia.acabouFala)
-        {
-            PararPlayer();
-        }
-        else
-        {
-            AndarPlayer();
-        }
-    }
-
-
     private void flip()
     {
         facingright = !facingright;
@@ -113,8 +144,6 @@ public class Player : BasePlayer {
         if (coll.gameObject.tag != "Floor")
 			vasculhando = true;
 
-
-
 		//objetos;
 			if (coll.gameObject.tag == "Armario") {
 			
@@ -126,7 +155,6 @@ public class Player : BasePlayer {
 
 						objetoDatilografia.Digitando("Dialogo\\Objetos\\Armario\\1_Vez.txt");
 						armarioVez++;
-
 					}
 					else {
 						hudDialogo.SetActive (true);
@@ -147,9 +175,8 @@ public class Player : BasePlayer {
 						
 						objetoDatilografia.Digitando("Dialogo\\Objetos\\Tapete\\1_Vez.txt");
 						tapeteVez++;
-						
+                        
 						PlayerPrefs.SetInt("chave", 1);
-
 					}
 					else {
 						
@@ -178,37 +205,32 @@ public class Player : BasePlayer {
 					hudDialogo.SetActive (true);
 					objetoDatilografia.Digitando("Dialogo\\Objetos\\Vasculhou.txt");
 				}
-
+                
 			}//fim verificação da tecla;
 		}//fim Relogio;
 
-        
 		else if(coll.gameObject.tag == "PortaBedroom"){
         
 			if (apertarTeclaE && vasculhando) {
                 
                 if ((portaBedroomVez == 0 || portaBedroomVez == 1) && cenaObjetos == 0 && PlayerPrefs.GetInt("chave") == 1) {
-
 					hudDialogo.SetActive (true);
 
 					objetoDatilografia.Digitando("Dialogo\\Objetos\\PortaBedroom\\1_VezChave.txt");
 					portaBedroomVez++;
+                    
+                    capitulo1.Evento = 4;
+                    
+                    
                     PlayerPrefs.SetInt("chave", 0);
-
-                    capitulo1.RodarEvento = true;
-
-
+                    
 				}
 				else if (portaBedroomVez == 0 && cenaObjetos == 0 && PlayerPrefs.GetInt("chave") == 0) {
-
 					hudDialogo.SetActive (true);
-
 					objetoDatilografia.Digitando("Dialogo\\Objetos\\PortaBedroom\\1_Vez.txt");
 					portaBedroomVez++;
-
 				}
 				else {
-
 					hudDialogo.SetActive (true);
 					objetoDatilografia.Digitando("Dialogo\\Objetos\\Vasculhou.txt");
 				}
@@ -348,6 +370,7 @@ public class Player : BasePlayer {
         }//fim Camera;
 
         #endregion
+    
     }//fim Trigger;
 
     void OnTriggerExit2D(Collider2D coll)
@@ -360,22 +383,26 @@ public class Player : BasePlayer {
 
 
     #region Funções Importantes
-    //pensando...
-    private void VasculharObjeto(string nomeObjeto, int vezObjeto, int cenaObjetos)
+    private void VerificarFalaAcabou()
     {
-        if (gameObject)
-        {
-
+        //verifica se a fala acabou;
+        if (!datilografia.acabouFala || !inicioDatilografia.acabouFala || !objetoDatilografia.acabouFala || !podeMover) {
+            speed = 0;
+		    mover = false;
+            print("Parar");
+        }
+        else {
+            speed = speed_natural;
+		    mover = true;
+            print("Andar");
         }
     }
 
     public void PararPlayer(){
-		speed = 0;
-		mover = false;
+		podeMover = false;
 	}
 	public void AndarPlayer(){
-		speed = speed_natural;
-		mover = true;
+		podeMover = true;
 	}
     public void ResetarVezesVasculhou(string cenario, int vezValor)
     {
@@ -400,25 +427,19 @@ public class Player : BasePlayer {
     private void VerificarVasculhar()
     {
         //vasculhar if;
-        if (vasculhando)
-        {
-
+        if (vasculhando){
             imagemTecla.sprite = teclaE[1];
         }
-        else
-        {
-            imagemTecla.sprite = teclaE[0];
+        else{
+             imagemTecla.sprite = teclaE[0];
         }
     }
-
     private void VerificarTeclaE()
     {
-        if (Input.GetKeyDown(KeyCode.E) && podeApertarE == true)
-        {
+        if (Input.GetKeyDown(KeyCode.E) && podeApertarE == true){
             apertarTeclaE = true;
         }
-        else
-        {
+        else{
             apertarTeclaE = false;
         }
     }

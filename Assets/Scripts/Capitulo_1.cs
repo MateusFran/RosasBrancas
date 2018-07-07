@@ -18,6 +18,7 @@ public class Capitulo_1 : BaseCapitulo {
     {
         //RodarParte = false;
     }
+
     public void comecar()
     {
         RodarParte = true;
@@ -32,9 +33,11 @@ public class Capitulo_1 : BaseCapitulo {
         
         if (RodarParte)
         {
-            if (RodarEvento && Evento == 1)
+            if(RodarEvento && Evento == 0){
+                //Evento Vazio;
+            }
+            else if (RodarEvento && Evento == 1)
             {
-
                 hud_TelaPreta.SetActive(true);
                 InicioDatilografia("Fala1");
                 Evento++;
@@ -48,12 +51,17 @@ public class Capitulo_1 : BaseCapitulo {
             {
                 Tutorial();
                 Invoke("Tutorial", 3.0f);
-                Evento++;
+                player.AndarPlayer();
+                Evento = 0;
             }
             else if (RodarEvento && Evento == 4)
             {
+                print("entrou...Evento4");
+                
                 player.PararPlayer();
                 player.ResetarVezesVasculhou("Bedroom", 1);
+                Evento = 0;
+                StartCoroutine("Evento4");
             }
             else
             {
@@ -69,7 +77,6 @@ public class Capitulo_1 : BaseCapitulo {
         parte = Parte;
     }
     #region Métodos/Funções
-
     public void Tutorial()
     {
         if (hud_Tutorial.activeSelf)
@@ -83,7 +90,6 @@ public class Capitulo_1 : BaseCapitulo {
     }
 
     #endregion
-
     #region CutScene/Configurações
 
     private IEnumerator Evento2()
@@ -96,6 +102,17 @@ public class Capitulo_1 : BaseCapitulo {
         telaPreta.SetTrigger("fadeIn");
         Datilografia("Fala2");
         player.PararPlayer();
+    }
+    private IEnumerator Evento4(){
+
+        telaPreta.SetTrigger("fadeOut");
+
+        yield return new WaitForSeconds(1f);
+        MudarCenario("Redroom");
+        SetarPosicao(objeto_Player, -5.15f, -1.5f);
+        yield return new WaitForSeconds(0.2f);
+        telaPreta.SetTrigger("fadeIn");
+        player.AndarPlayer();
     }
 
     #endregion

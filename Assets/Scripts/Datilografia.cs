@@ -10,16 +10,13 @@ public class Datilografia : MonoBehaviour {
 	private string texto; 
 	private char[] letras;
 	private string[] falas;
-
 	public Text texto_hud, 
 				nomepersonagem_hud, 
 				space_hud;
 
 	[SerializeField]
 	private float delay;
-
 	public GameObject hud;
-
 	public bool nomepersonagem = true, 
 				pulardelay = false, 
 				controle_space = false, 
@@ -28,6 +25,7 @@ public class Datilografia : MonoBehaviour {
     //outros Scripsts;
     public Player player;
 
+	//capitulos;
     public Capitulo_1 capitulo1;
 
 	void Start(){
