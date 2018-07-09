@@ -19,7 +19,6 @@ public class Capitulo_1 : BaseCapitulo {
     {
         //PlayerPrefs;
         PlayerPrefs.SetInt("escolha", 0);
-
     }
 
     public void comecar()
