@@ -96,6 +96,7 @@ public class Datilografia : MonoBehaviour {
 
         //capitulos;
         capitulo1.RodarEvento = true;
+		capitulo1.RodarCapitulo = true;
 
         player.podeApertarE = true;
 		acabouFala = true;

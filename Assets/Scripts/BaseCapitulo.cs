@@ -5,6 +5,10 @@ using UnityEngine;
 public class BaseCapitulo : MonoBehaviour {
 
     #region Variáveis Gerais
+
+    public bool RodarCapitulo{ get; set;}
+    public int Capitulo{ get; set;}
+
     //Player;
     public Player player;
     public GameObject objeto_Player;
@@ -45,11 +49,18 @@ public class BaseCapitulo : MonoBehaviour {
     #endregion
 
     private void Start () {
-        capitulo1.comecar();
+        Capitulo = 1;
+        RodarCapitulo = true;
 	}
 	
 	private void Update () {
-		
+		if(RodarCapitulo && Capitulo == 1){
+            capitulo1.comecar();
+        }
+        else{
+
+        }
+        RodarCapitulo = false;
 	}
 
     #region Funções Importantes

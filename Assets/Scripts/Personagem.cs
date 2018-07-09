@@ -2,29 +2,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class BasePersonagem {
+
+    [SerializeField] public GameObject objeto;
+    [SerializeField] public Rigidbody2D rb;
+    [SerializeField] public Animator animator;
+}
 public class Personagem : MonoBehaviour {
 
-    public GameObject mae,
-                      pai;
+    //Personagens;
+    [SerializeField] BasePersonagem pai = new BasePersonagem();
+    [SerializeField] BasePersonagem mae = new BasePersonagem();
 
-    public Rigidbody2D maeRb,
-                       paiRb;
-
-    private Rigidbody2D rb;
+    [SerializeField] private Capitulo_1 capitulo1;
+    [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float velocidade;
-    [SerializeField] private int tempo;
+    [SerializeField] private float tempo;
     private bool podeMover;
+    private float direcao;
+
+    private bool verificarEvento;
 	// Use this for initialization
 	void Start () {
         
         podeMover = false;
-        velocidade = 0f;
+        verificarEvento = false;
 
         //SetActives;
-        mae.SetActive(false);
-        pai.SetActive(false);
+        pai.objeto.SetActive(false);
+        mae.objeto.SetActive(false);
 
 	}
+    void Update()
+    {
+        Cronometro();
+
+        //Animators;
+        pai.animator.SetFloat("velocidade", velocidade);
+    }
     void FixedUpdate() {
         Movimentacao();
     }
@@ -32,13 +48,13 @@ public class Personagem : MonoBehaviour {
     {
         if (nome == "Pai")
         {
-            pai.SetActive(true);
-            SetarPosicao(pai, posX, posY);
+            pai.objeto.SetActive(true);
+            SetarPosicao(pai.objeto, posX, posY);
         }
         else if(nome == "Mãe")
         {
-            mae.SetActive(true);
-            SetarPosicao(mae, posX, posY);
+            mae.objeto.SetActive(true);
+            SetarPosicao(mae.objeto, posX, posY);
         }
         else
         {
@@ -47,28 +63,55 @@ public class Personagem : MonoBehaviour {
     }
     private void Movimentacao(){
         if(podeMover){
-            rb.velocity = new Vector2(1 * velocidade, rb.velocity.y);
+            rb.velocity = new Vector2(direcao * velocidade, rb.velocity.y);
+            print("Movendo");
         }
     }
-    public void Mover(string nome, bool direcao, float tempo){
-        StartCoroutine("Cronometro");
+    public void Mover(string nome, float velocidade, bool direcao, float tempo){
         
+        this.tempo = tempo;
+        this.velocidade = velocidade;
+        //Direcao;
+        if(direcao){
+            this.direcao = 1;
+        }
+        else{
+            this.direcao = -1;
+        }
+        
+        //Quem deve mexer;
         if(nome == "Pai"){
-            rb = paiRb;    
+            rb = pai.rb;    
         }
         else if(nome == "Mãe"){
-            rb = maeRb;
+            rb = mae.rb;
         }
+        else{
+            print("Nenhum RB selecionado...");
+        }
+
+        verificarEvento = true;
     }
-    private IEnumerator Cronometro(){
-        podeMover = true;
-        float i = 0;
-        while(i < tempo){
-            yield return new WaitForSeconds(0.1f);
-            i += 0.1f;
-            print(i);
+    private void Cronometro(){
+        if (tempo > 0)
+        {
+            tempo -= Time.deltaTime;
+            podeMover = true;
         }
-        podeMover = false;
+        else if(tempo <= 0){
+            podeMover = false;
+            velocidade = 0;
+
+            if(verificarEvento){
+                capitulo1.RodarParte = true;
+                capitulo1.RodarEvento = true;
+
+                verificarEvento = false;
+            }
+        }
+        else{
+            print("Erro...");
+        }
     }
     private void SetarPosicao(GameObject objeto, float posX, float posY)
     {

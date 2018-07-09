@@ -93,6 +93,7 @@ public class InicioDatilografia : MonoBehaviour {
 		PlayerPrefs.SetInt ("objetoDialogo", 1);
 
         capitulo1.RodarEvento = true;
+		capitulo1.RodarParte = true;
 
 		hud.SetActive (false);
 		acabouFala = true;

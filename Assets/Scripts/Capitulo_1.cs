@@ -28,7 +28,7 @@ public class Capitulo_1 : BaseCapitulo {
         RodarEvento = true;
 
         Evento = evento;
-        Parte = parte;
+        Parte = 1;
     }
 
     private void Update()
@@ -39,7 +39,7 @@ public class Capitulo_1 : BaseCapitulo {
 
         EscolhaAtual =  PlayerPrefs.GetInt("escolha");
 
-        if (RodarParte)
+        if (RodarParte && Parte == 1)
         {
             if(RodarEvento && Evento == 0){
                 //Evento Vazio;
@@ -53,13 +53,13 @@ public class Capitulo_1 : BaseCapitulo {
             else if (RodarEvento && Evento == 2)
             {
                 StartCoroutine("Evento2");
+                player.AndarPlayer();
                 Evento++;
             }
             else if (RodarEvento && Evento == 3)
             {   
                 Tutorial();
                 Invoke("Tutorial", 3.0f);
-                player.AndarPlayer();
                 Evento = 0;
             }
             else if (RodarEvento && Evento == 4)
@@ -91,19 +91,27 @@ public class Capitulo_1 : BaseCapitulo {
                 Evento++;
             }
             else if(RodarEvento && Evento == 9 && EscolhaAtual == 2){
-                
+                personagem.Mover("Pai", 4.5f, true, 2.0f);
+                Evento++;
+            }
+            else if(RodarEvento && Evento == 10 && EscolhaAtual == 2){
+                telaPreta.SetTrigger("fadeOut");
             }
             else{
-
+                
             }
             evento = Evento;
             RodarEvento = false;
+        }
+        else if(RodarParte && Parte == 2){
+            print("Eae boi...");
         }
         else
         {
             print("Nenhuma parte foi rodada!");
         }
         parte = Parte;
+        RodarParte = false;
     }
     #region Métodos/Funções
     private void VerificarTodosObjetos(){
@@ -175,5 +183,6 @@ public class Capitulo_1 : BaseCapitulo {
         yield return new WaitForSeconds(0.7f);
         Datilografia("Fala6_Esc1");
     }
+
     #endregion
 }
