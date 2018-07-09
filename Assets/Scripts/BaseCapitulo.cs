@@ -9,6 +9,9 @@ public class BaseCapitulo : MonoBehaviour {
     public Player player;
     public GameObject objeto_Player;
 
+    //Personagens;
+    public Personagem personagem;
+
     //Códigos de diálogo;
     public Datilografia datilografia;
     public InicioDatilografia inicioDatilografia;

@@ -12,11 +12,14 @@ public class Capitulo_1 : BaseCapitulo {
     public bool RodarEvento { get; set; }
     public int Evento { get; set; }
     public int Parte { get; set; }
+    public int EscolhaAtual{ get; set;}
     
 
     private void Start()
     {
-        //RodarParte = false;
+        //PlayerPrefs;
+        PlayerPrefs.SetInt("escolha", 0);
+
     }
 
     public void comecar()
@@ -31,6 +34,11 @@ public class Capitulo_1 : BaseCapitulo {
     private void Update()
     {
         
+        //Verifica se vasculhou todos os objetos da cena;
+        VerificarTodosObjetos();
+
+        EscolhaAtual =  PlayerPrefs.GetInt("escolha");
+
         if (RodarParte)
         {
             if(RodarEvento && Evento == 0){
@@ -48,24 +56,45 @@ public class Capitulo_1 : BaseCapitulo {
                 Evento++;
             }
             else if (RodarEvento && Evento == 3)
-            {
+            {   
                 Tutorial();
                 Invoke("Tutorial", 3.0f);
                 player.AndarPlayer();
                 Evento = 0;
             }
             else if (RodarEvento && Evento == 4)
-            {
-                print("entrou...Evento4");
-                
+            {   
                 player.PararPlayer();
                 player.ResetarVezesVasculhou("Bedroom", 1);
                 Evento = 0;
                 StartCoroutine("Evento4");
             }
-            else
-            {
-               
+            else if(RodarEvento && Evento == 5){
+                Datilografia("Fala4");
+                player.cenaObjetos = 1;
+                Evento = 0;
+            }
+            else if(RodarEvento && Evento == 6){
+                StartCoroutine("Evento6");
+                Evento++;
+            }
+            else if(RodarEvento && Evento == 7){
+                hud_Escolhas.SetActive(true);
+                script_Escolha.SetarEscolhas("Sair", "Não Sair");
+                Evento++;
+            }
+            else if(RodarEvento && Evento == 8 && EscolhaAtual == 1){
+                StartCoroutine("Evento8_Esc1");
+            }
+            else if(RodarEvento && Evento == 8 && EscolhaAtual == 2){
+                Datilografia("Fala6_Esc2");
+                Evento++;
+            }
+            else if(RodarEvento && Evento == 9 && EscolhaAtual == 2){
+                
+            }
+            else{
+
             }
             evento = Evento;
             RodarEvento = false;
@@ -77,7 +106,10 @@ public class Capitulo_1 : BaseCapitulo {
         parte = Parte;
     }
     #region Métodos/Funções
-    public void Tutorial()
+    private void VerificarTodosObjetos(){
+        player.VasculharTodosObjetos("Redroom", 1);
+    }
+    private void Tutorial()
     {
         if (hud_Tutorial.activeSelf)
         {
@@ -92,8 +124,7 @@ public class Capitulo_1 : BaseCapitulo {
     #endregion
     #region CutScene/Configurações
 
-    private IEnumerator Evento2()
-    {
+    private IEnumerator Evento2(){
         MudarCenario("Bedroom");
         yield return new WaitForSeconds(0.3f);
 
@@ -113,7 +144,36 @@ public class Capitulo_1 : BaseCapitulo {
         yield return new WaitForSeconds(0.2f);
         telaPreta.SetTrigger("fadeIn");
         player.AndarPlayer();
+        Datilografia("Fala3");
     }
+    private IEnumerator Evento6(){
+        
+        player.PararPlayer();
 
+        telaPreta.SetTrigger("fadeOut");
+        yield return new WaitForSeconds(1f);
+        MudarCenario("Redroom");
+
+        personagem.Chamar("Pai", -5f, -1.5f);
+        objeto_Player.SetActive(false);
+
+        yield return new WaitForSeconds(0.3f);
+        telaPreta.SetTrigger("fadeIn");
+
+        yield return new WaitForSeconds(0.5f);
+        Datilografia("Fala5");
+    }
+    private IEnumerator Evento8_Esc1(){
+
+        telaPreta.SetTrigger("fadeOut");
+        yield return new WaitForSeconds(2f);
+
+        objeto_Player.SetActive(true);
+        yield return new WaitForSeconds(0.2f);
+        telaPreta.SetTrigger("fadeIn");
+
+        yield return new WaitForSeconds(0.7f);
+        Datilografia("Fala6_Esc1");
+    }
     #endregion
 }

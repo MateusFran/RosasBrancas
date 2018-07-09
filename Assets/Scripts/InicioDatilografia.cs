@@ -95,8 +95,6 @@ public class InicioDatilografia : MonoBehaviour {
         capitulo1.RodarEvento = true;
 
 		hud.SetActive (false);
-
-        print(acabouFala);
 		acabouFala = true;
 	}
 }

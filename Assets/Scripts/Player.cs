@@ -78,9 +78,7 @@ public class Player : MonoBehaviour {
     }
 
 	void Update(){
-        //Verifica se vasculhou todos os objetos da cena;
-        VerificarObjetosRedroom(1);
-
+        
         //Métodos;
         VerificarTeclaE();
         VerificarVasculhar();
@@ -116,24 +114,37 @@ public class Player : MonoBehaviour {
 		imagemTecla.transform.localScale = teclaScale;
     }
 
-    private void VerificarObjetosRedroom(int vez)
+    public void VasculharTodosObjetos(string cenario, int vez)
     {
-        /*objetos:
+        /*
+        objetos Bedroom:
 
         * portaRedroom
         * camera
         * quadro
         * mesa
+
+        objetos Redroom:
+
+        *mesa
+        *portaBedroom
+        *camera
+        *quadro
+
         */
 
-        if ((portaRedroomVez == vez && cameraVez == vez && quadroVez == vez && mesaVez == vez) && PlayerPrefs.GetInt("VasculhouObjetos") == 1)
+        if (cenario == "Bedroom")
         {
-            PlayerPrefs.SetInt("rodarCap1Part5", 1);
-            PlayerPrefs.SetInt("VasculhouObjetos", 0);
+            if(portaBedroomVez == vez && cameraVez == vez && quadroVez == vez && mesaVez == vez){
+                //colocar o evento que vai rodar aqui...
+            }
 
-            print("Vasculhou...");
+        }
+        else if(cenario == "Redroom"){
+            if((mesaVez == vez && portaRedroomVez == vez && cameraVez == vez && quadroVez == vez) && cenaObjetos == 0){
+                capitulo1.Evento = 5;
+            }
 
-            PlayerPrefs.SetInt("rodarParte", 1);
         }
     }
 
@@ -357,6 +368,7 @@ public class Player : MonoBehaviour {
                     objetoDatilografia.Digitando("Dialogo\\Objetos\\Camera\\2_Vez.txt");
 
                     cameraVez++;
+                    capitulo1.Evento = 6;
                     //scriptGeral.parte++;
                 }
                 else
