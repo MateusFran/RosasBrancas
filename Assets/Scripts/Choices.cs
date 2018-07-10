@@ -39,8 +39,8 @@ public class Choices : MonoBehaviour {
         hud_TelaPreta.SetActive(true);
         print("Escolheu SIM");
 
-        capitulo1.RodarParte = true;
         capitulo1.RodarEvento = true;
+        capitulo1.RodarParte = true;
 	}
 	public void EscolhaDireita(){
 	
@@ -50,7 +50,7 @@ public class Choices : MonoBehaviour {
         hud_TelaPreta.SetActive(true);
         print("Escolheu NÃO");
 
-        capitulo1.RodarParte = true;
         capitulo1.RodarEvento = true;
+        capitulo1.RodarParte = true;
     }
 }

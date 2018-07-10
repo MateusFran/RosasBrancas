@@ -5,7 +5,6 @@ using UnityEngine;
 public class Capitulo_1 : BaseCapitulo {
 
     //Variaveis;
-
     public int parte, evento;
 
     public bool RodarParte { get; set; }
@@ -23,11 +22,12 @@ public class Capitulo_1 : BaseCapitulo {
 
     public void comecar()
     {
+        
         RodarParte = true;
         RodarEvento = true;
 
         Evento = evento;
-        Parte = 1;
+        Parte = parte;
     }
 
     private void Update()
@@ -38,7 +38,7 @@ public class Capitulo_1 : BaseCapitulo {
 
         EscolhaAtual =  PlayerPrefs.GetInt("escolha");
 
-        if (RodarParte && Parte == 1)
+        if (RodarParte)
         {
             if(RodarEvento && Evento == 0){
                 //Evento Vazio;
@@ -52,13 +52,13 @@ public class Capitulo_1 : BaseCapitulo {
             else if (RodarEvento && Evento == 2)
             {
                 StartCoroutine("Evento2");
-                player.AndarPlayer();
                 Evento++;
             }
             else if (RodarEvento && Evento == 3)
             {   
                 Tutorial();
                 Invoke("Tutorial", 3.0f);
+                player.AndarPlayer();
                 Evento = 0;
             }
             else if (RodarEvento && Evento == 4)
@@ -102,15 +102,11 @@ public class Capitulo_1 : BaseCapitulo {
             evento = Evento;
             RodarEvento = false;
         }
-        else if(RodarParte && Parte == 2){
-            print("Eae boi...");
-        }
         else
         {
             print("Nenhuma parte foi rodada!");
         }
-        parte = Parte;
-        RodarParte = false;
+        //parte = Parte;
     }
     #region Métodos/Funções
     private void VerificarTodosObjetos(){

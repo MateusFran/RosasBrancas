@@ -12,7 +12,7 @@ public class BaseCapitulo : MonoBehaviour {
     //Player;
     public Player player;
     public GameObject objeto_Player;
-
+    
     //Personagens;
     public Personagem personagem;
 
@@ -49,18 +49,11 @@ public class BaseCapitulo : MonoBehaviour {
     #endregion
 
     private void Start () {
-        Capitulo = 1;
-        RodarCapitulo = true;
+        capitulo1.comecar();
 	}
 	
 	private void Update () {
-		if(RodarCapitulo && Capitulo == 1){
-            capitulo1.comecar();
-        }
-        else{
 
-        }
-        RodarCapitulo = false;
 	}
 
     #region Funções Importantes
