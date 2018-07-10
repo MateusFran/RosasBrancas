@@ -23,7 +23,7 @@ public class Capitulo_1 : BaseCapitulo {
     public void comecar()
     {
         Evento = evento;
-        Parte = parte;
+        Parte = 1;
 
         RodarParte = true;
         RodarEvento = true;
@@ -32,6 +32,7 @@ public class Capitulo_1 : BaseCapitulo {
     private void Update()
     {
         print(Parte);
+        print(RodarParte);
 
         //Verifica se vasculhou todos os objetos da cena;
         VerificarTodosObjetos();
@@ -81,37 +82,43 @@ public class Capitulo_1 : BaseCapitulo {
             }
             else if(RodarEvento && Evento == 8 && EscolhaAtual == 1){
                 StartCoroutine("Evento8_Esc1");
+                Parte++;
+                Evento = 1;
             }
             else if(RodarEvento && Evento == 8 && EscolhaAtual == 2){
                 Datilografia("Fala6_Esc2");
                 Evento++;
             }
-            else if(RodarEvento && Evento == 9 && EscolhaAtual == 1){
-                
-            }
             else if(RodarEvento && Evento == 9 && EscolhaAtual == 2){
-                personagem.Mover("Pai", 4.5f, true, 2.0f);
-                Evento++;
-            }
-            else if(RodarEvento && Evento == 10 && EscolhaAtual == 2){
-                telaPreta.SetTrigger("fadeOut");
+                personagem.Mover("Pai", 4.5f, true, 2.3f);
+                Parte++;
+                Evento = 1;
             }
             else{
                 print("Nenhum Evento Rodou!");
             }
             evento = Evento;
             RodarEvento = false;
-
-            parte = Parte;
-            RodarParte = false;
         }
-        else if(RodarParte && Parte == 1){
-            print("Parte2");
+        else if(RodarParte && Parte == 2){
+            if(RodarEvento && Evento == 0){
+                //Evento Vazio;
+            }
+            else if(RodarEvento && Evento == 1){
+                telaPreta.SetTrigger("fadeOut");
+                Evento++;
+            }
+            else if(RodarEvento && Evento == 2){
+                
+            }
         }
         else
         {
             print("Nenhuma Parte Rodou");
         }
+
+        parte = Parte;
+        RodarParte = false;
     }
     #region Métodos/Funções
     private void VerificarTodosObjetos(){

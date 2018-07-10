@@ -80,7 +80,7 @@ public class Personagem : MonoBehaviour {
         else{
             this.direcao = -1;
         }
-        
+
         //Quem deve mexer;
         if(nome == "Pai"){
             rb = pai.rb;    
@@ -103,6 +103,8 @@ public class Personagem : MonoBehaviour {
         else if(tempo <= 0){
             podeMover = false;
             velocidade = 0;
+            
+            rb.velocity = new Vector2(0f, rb.velocity.y);
 
             if(verificarEvento){
                 capitulo1.RodarParte = true;
