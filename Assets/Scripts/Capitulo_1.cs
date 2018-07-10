@@ -197,6 +197,11 @@ public class Capitulo_1 : BaseCapitulo {
         yield return new WaitForSeconds(1f);
         InicioDatilografia("Fala7", 1);
     }
+    //Abertura do Jogo;
+    private IEnumerator Evento2_Pt2(){
+        yield return new WaitForSeconds(1f);
+        
+    }
 
     #endregion
 }

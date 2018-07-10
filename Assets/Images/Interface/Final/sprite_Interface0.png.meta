@@ -1,8 +1,7 @@
 fileFormatVersion: 2
-guid: 57e779ce30951d944859f40bcc6f04c4
+guid: ea3a5c3d11d372c44b2ad4cbb5621e1a
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: oFF_21_0
+  fileIDToRecycleName: {}
   externalObjects: {}
   serializedVersion: 5
   mipmaps:
@@ -39,7 +38,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -103,31 +102,11 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: oFF_21_0
-      rect:
-        serializedVersion: 2
-        x: 500
-        y: 200
-        width: 260
-        height: 260
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2198d2083e19b7947829439ae1e51946
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: b9c0ad7377171eb4a8c60865a262d991
+    spriteID: c07f9b580d745764397dafdef32bd63e
     vertices: []
     indices: 
     edges: []
