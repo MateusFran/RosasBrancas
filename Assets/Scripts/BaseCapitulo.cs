@@ -22,7 +22,6 @@ public class BaseCapitulo : MonoBehaviour {
     public ObjetoDatilografia objetoDatilografia;
 
     public Timer script_Timer;
-    public CutScenes script_CutScene;
     public Choices script_Escolha;
 
     //Animações;
@@ -46,14 +45,26 @@ public class BaseCapitulo : MonoBehaviour {
     //Capítulos;
     [SerializeField] private Capitulo_1 capitulo1;
 
+    //Numero do capitulo;
+    [SerializeField] private int capitulo;
+
     #endregion
 
     private void Start () {
-        capitulo1.comecar();
+
+        Capitulo = capitulo;
+        RodarCapitulo = true;
+
 	}
 	
 	private void Update () {
-
+        if(RodarCapitulo && Capitulo == 1){
+            capitulo1.comecar();
+        }
+        else{
+            //print("Nenhum Capitulo Rodou");
+        }
+        RodarCapitulo = false;
 	}
 
     #region Funções Importantes

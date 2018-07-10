@@ -11,7 +11,7 @@ public class Capitulo_1 : BaseCapitulo {
     public bool RodarEvento { get; set; }
     public int Evento { get; set; }
     public int Parte { get; set; }
-    public int EscolhaAtual{ get; set;}
+    public int EscolhaAtual{ get; set; }
     
 
     private void Start()
@@ -22,40 +22,37 @@ public class Capitulo_1 : BaseCapitulo {
 
     public void comecar()
     {
-        
-        RodarParte = true;
-        RodarEvento = true;
-
         Evento = evento;
         Parte = parte;
+
+        RodarParte = true;
+        RodarEvento = true;
     }
 
     private void Update()
     {
-        
+        print(Parte);
+
         //Verifica se vasculhou todos os objetos da cena;
         VerificarTodosObjetos();
 
         EscolhaAtual =  PlayerPrefs.GetInt("escolha");
 
-        if (RodarParte)
+        if (RodarParte && Parte == 1)
         {
             if(RodarEvento && Evento == 0){
                 //Evento Vazio;
             }
-            else if (RodarEvento && Evento == 1)
-            {
+            else if (RodarEvento && Evento == 1){
                 hud_TelaPreta.SetActive(true);
                 InicioDatilografia("Fala1");
                 Evento++;
             }
-            else if (RodarEvento && Evento == 2)
-            {
+            else if (RodarEvento && Evento == 2){
                 StartCoroutine("Evento2");
                 Evento++;
             }
-            else if (RodarEvento && Evento == 3)
-            {   
+            else if (RodarEvento && Evento == 3){   
                 Tutorial();
                 Invoke("Tutorial", 3.0f);
                 player.AndarPlayer();
@@ -89,6 +86,9 @@ public class Capitulo_1 : BaseCapitulo {
                 Datilografia("Fala6_Esc2");
                 Evento++;
             }
+            else if(RodarEvento && Evento == 9 && EscolhaAtual == 1){
+                
+            }
             else if(RodarEvento && Evento == 9 && EscolhaAtual == 2){
                 personagem.Mover("Pai", 4.5f, true, 2.0f);
                 Evento++;
@@ -97,16 +97,21 @@ public class Capitulo_1 : BaseCapitulo {
                 telaPreta.SetTrigger("fadeOut");
             }
             else{
-                
+                print("Nenhum Evento Rodou!");
             }
             evento = Evento;
             RodarEvento = false;
+
+            parte = Parte;
+            RodarParte = false;
+        }
+        else if(RodarParte && Parte == 1){
+            print("Parte2");
         }
         else
         {
-            print("Nenhuma parte foi rodada!");
+            print("Nenhuma Parte Rodou");
         }
-        //parte = Parte;
     }
     #region Métodos/Funções
     private void VerificarTodosObjetos(){
@@ -125,7 +130,7 @@ public class Capitulo_1 : BaseCapitulo {
     }
 
     #endregion
-    #region CutScene/Configurações
+    #region CutScene/Configurações Parte_1
 
     private IEnumerator Evento2(){
         MudarCenario("Bedroom");
@@ -178,6 +183,8 @@ public class Capitulo_1 : BaseCapitulo {
         yield return new WaitForSeconds(0.7f);
         Datilografia("Fala6_Esc1");
     }
+    #endregion
+    #region CutScene/Configurações Parte_2
 
     #endregion
 }

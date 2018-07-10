@@ -12,7 +12,9 @@ public class Player : MonoBehaviour {
     [SerializeField] private float speed;
     public float speed_natural;
     public bool mover;
-    [SerializeField] private bool podeMover;
+
+    public bool podeMover;
+
     private bool facingright = true;
 
     private Animator animacao;

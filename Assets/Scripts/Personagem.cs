@@ -39,7 +39,9 @@ public class Personagem : MonoBehaviour {
         Cronometro();
 
         //Animators;
-        pai.animator.SetFloat("velocidade", velocidade);
+        if(pai.objeto.activeSelf){
+            pai.animator.SetFloat("velocidade", velocidade);
+        }
     }
     void FixedUpdate() {
         Movimentacao();
