@@ -46,7 +46,7 @@ public class Capitulo_1 : BaseCapitulo {
             }
             else if (RodarEvento && Evento == 1){
                 hud_TelaPreta.SetActive(true);
-                InicioDatilografia("Fala1");
+                InicioDatilografia("Fala1", 1);
                 Evento++;
             }
             else if (RodarEvento && Evento == 2){
@@ -67,7 +67,7 @@ public class Capitulo_1 : BaseCapitulo {
                 StartCoroutine("Evento4");
             }
             else if(RodarEvento && Evento == 5){
-                Datilografia("Fala4");
+                Datilografia("Fala4", 1);
                 player.cenaObjetos = 1;
                 Evento = 0;
             }
@@ -86,7 +86,7 @@ public class Capitulo_1 : BaseCapitulo {
                 Evento = 1;
             }
             else if(RodarEvento && Evento == 8 && EscolhaAtual == 2){
-                Datilografia("Fala6_Esc2");
+                Datilografia("Fala6_Esc2", 1);
                 Evento++;
             }
             else if(RodarEvento && Evento == 9 && EscolhaAtual == 2){
@@ -105,8 +105,7 @@ public class Capitulo_1 : BaseCapitulo {
                 //Evento Vazio;
             }
             else if(RodarEvento && Evento == 1){
-                telaPreta.SetTrigger("fadeOut");
-                Evento++;
+                StartCoroutine("Evento1_Pt2");
             }
             else if(RodarEvento && Evento == 2){
                 
@@ -146,7 +145,7 @@ public class Capitulo_1 : BaseCapitulo {
         telaPreta.SetTrigger("fadeIn");
         SetarPosicao(objeto_Player, -5.78f, -1.72f);
         telaPreta.SetTrigger("fadeIn");
-        Datilografia("Fala2");
+        Datilografia("Fala2", 1);
         player.PararPlayer();
     }
     private IEnumerator Evento4(){
@@ -159,7 +158,7 @@ public class Capitulo_1 : BaseCapitulo {
         yield return new WaitForSeconds(0.2f);
         telaPreta.SetTrigger("fadeIn");
         player.AndarPlayer();
-        Datilografia("Fala3");
+        Datilografia("Fala3", 1);
     }
     private IEnumerator Evento6(){
         
@@ -176,7 +175,7 @@ public class Capitulo_1 : BaseCapitulo {
         telaPreta.SetTrigger("fadeIn");
 
         yield return new WaitForSeconds(0.5f);
-        Datilografia("Fala5");
+        Datilografia("Fala5", 1);
     }
     private IEnumerator Evento8_Esc1(){
 
@@ -188,10 +187,16 @@ public class Capitulo_1 : BaseCapitulo {
         telaPreta.SetTrigger("fadeIn");
 
         yield return new WaitForSeconds(0.7f);
-        Datilografia("Fala6_Esc1");
+        Datilografia("Fala6_Esc1", 1);
     }
     #endregion
     #region CutScene/Configurações Parte_2
+
+    private IEnumerator Evento1_Pt2(){
+        telaPreta.SetTrigger("fadeOut");
+        yield return new WaitForSeconds(1f);
+        InicioDatilografia("Fala7", 1);
+    }
 
     #endregion
 }

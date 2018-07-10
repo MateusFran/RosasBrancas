@@ -92,15 +92,19 @@ public class BaseCapitulo : MonoBehaviour {
         objeto.transform.position = posicaoCena;
     }
 
-    public void InicioDatilografia(string arquivo)
+    public void InicioDatilografia(string arquivo, int capitulo)
     {
         hud_DialogoInicial.SetActive(true);
+        if(capitulo == 1){
         inicioDatilografia.Digitando("Dialogo\\Capitulo1\\" + arquivo + ".txt");
+        }
     }
-    public void Datilografia(string arquivo)
+    public void Datilografia(string arquivo, int capitulo)
     {
         hud_Dialogo.SetActive(true);
+        if(capitulo == 1){
         datilografia.Digitando("Dialogo\\Capitulo1\\" + arquivo + ".txt");
+        }
     }
     #endregion
 }
