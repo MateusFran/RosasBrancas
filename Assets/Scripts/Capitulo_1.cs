@@ -5,7 +5,7 @@ using UnityEngine;
 public class Capitulo_1 : BaseCapitulo {
 
     //Variaveis;
-    public int parte, evento;
+    public int parte, evento, mostrarParte;
 
     public bool RodarParte { get; set; }
     public bool RodarEvento { get; set; }
@@ -13,7 +13,6 @@ public class Capitulo_1 : BaseCapitulo {
     public int Parte { get; set; }
     public int EscolhaAtual{ get; set; }
     
-
     private void Start()
     {
         //PlayerPrefs;
@@ -23,7 +22,7 @@ public class Capitulo_1 : BaseCapitulo {
     public void comecar()
     {
         Evento = evento;
-        Parte = 1;
+        Parte = parte;
 
         RodarParte = true;
         RodarEvento = true;
@@ -31,12 +30,10 @@ public class Capitulo_1 : BaseCapitulo {
 
     private void Update()
     {
-        print(Parte);
-        print(RodarParte);
 
         //Verifica se vasculhou todos os objetos da cena;
         VerificarTodosObjetos();
-
+        mostrarParte = parte;
         EscolhaAtual =  PlayerPrefs.GetInt("escolha");
 
         if (RodarParte && Parte == 1)
@@ -105,6 +102,9 @@ public class Capitulo_1 : BaseCapitulo {
                 //Evento Vazio;
             }
             else if(RodarEvento && Evento == 1){
+                hud_TelaPreta.SetActive(true);
+                MudarCenario("Bedroom");
+
                 StartCoroutine("Evento1_Pt2");
             }
             else if(RodarEvento && Evento == 2){
@@ -116,7 +116,6 @@ public class Capitulo_1 : BaseCapitulo {
             print("Nenhuma Parte Rodou");
         }
 
-        parte = Parte;
         RodarParte = false;
     }
     #region Métodos/Funções
@@ -193,7 +192,9 @@ public class Capitulo_1 : BaseCapitulo {
     #region CutScene/Configurações Parte_2
 
     private IEnumerator Evento1_Pt2(){
+        if(!hud_TelaPreta.activeSelf){
         telaPreta.SetTrigger("fadeOut");
+        }
         yield return new WaitForSeconds(1f);
         InicioDatilografia("Fala7", 1);
     }
