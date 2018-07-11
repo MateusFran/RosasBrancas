@@ -17,7 +17,11 @@ public class Player : MonoBehaviour {
 
     private bool facingright = true;
 
-    private Animator animacao;
+    [SerializeField] private Animator animacao;
+    [SerializeField] private Animator animacaoJovem;
+
+    [SerializeField] private SpriteRenderer spriteRendCrianca;
+    [SerializeField] private SpriteRenderer spriteRendJovem;
 
     //variaveis de vez dos objetos;
     public int armarioVez,
@@ -57,7 +61,6 @@ public class Player : MonoBehaviour {
     void Start()
     {
         #region PlayerPrefs
-
         PlayerPrefs.SetInt("VasculhouObjetos", 1);
 
         #endregion
@@ -76,7 +79,6 @@ public class Player : MonoBehaviour {
         ResetarVezesVasculhou("Bedroom", 0);
 
 		rb = GetComponent<Rigidbody2D> ();
-        animacao = GetComponent<Animator>();
     }
 
 	void Update(){
@@ -97,6 +99,7 @@ public class Player : MonoBehaviour {
 		rb.velocity = new Vector2 (move * speed, rb.velocity.y);
 		if (mover) {
 			animacao.SetFloat ("Andando_Player", Mathf.Abs (move));
+            animacaoJovem.SetFloat("Andando_Player", Mathf.Abs(move));
 			if (move > 0 && !facingright)
 				flip ();
 			else if (move < 0 && facingright)
@@ -429,9 +432,9 @@ public class Player : MonoBehaviour {
         else if (cenario == "Redroom")
         {
             portaRedroomVez = vezValor;
-            relogioVez = vezValor;
             quadroVez = vezValor;
             mesaVez = vezValor;
+            cameraVez = vezValor;
         }
         else
         {
@@ -458,6 +461,20 @@ public class Player : MonoBehaviour {
         }
     }
 
+    public void TrocarEstado(string nomeEstado){
+
+        if(nomeEstado == "Crianca"){
+            spriteRendCrianca.enabled = true;
+            spriteRendJovem.enabled = false;
+        }
+        else if(nomeEstado == "Jovem"){
+            spriteRendCrianca.enabled = false;
+            spriteRendJovem.enabled = true;
+        }
+        else{
+            print("Nenhum Estado Escolhido");
+        }
+    }
     #endregion
 }//fim
 

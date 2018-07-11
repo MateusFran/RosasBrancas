@@ -34,6 +34,9 @@ public class Capitulo_1 : BaseCapitulo {
         //Verifica se vasculhou todos os objetos da cena;
         VerificarTodosObjetos();
         mostrarParte = parte;
+
+        print(Evento);
+
         EscolhaAtual =  PlayerPrefs.GetInt("escolha");
 
         if (RodarParte && Parte == 1)
@@ -42,6 +45,7 @@ public class Capitulo_1 : BaseCapitulo {
                 //Evento Vazio;
             }
             else if (RodarEvento && Evento == 1){
+                player.TrocarEstado("Crianca");
                 hud_TelaPreta.SetActive(true);
                 InicioDatilografia("Fala1", 1);
                 Evento++;
@@ -102,13 +106,34 @@ public class Capitulo_1 : BaseCapitulo {
                 //Evento Vazio;
             }
             else if(RodarEvento && Evento == 1){
+                
                 hud_TelaPreta.SetActive(true);
-                MudarCenario("Bedroom");
+                hud_TelaPreta.SetActive(true);
+                
+                player.ResetarVezesVasculhou("Bedroom", 1);
+                player.ResetarVezesVasculhou("Redroom", 2);
 
-                StartCoroutine("Evento1_Pt2");
+                StartCoroutine(Evento1_Pt2());
+                Evento++;
             }
             else if(RodarEvento && Evento == 2){
-                
+
+                hud_IntroducaoCapitulo.SetActive(true);
+
+                StartCoroutine(Evento2_Pt2());
+                Evento++;
+            }
+            else if(RodarEvento && Evento == 3){
+                StartCoroutine(Evento3_Pt2());
+                Evento++;
+            }
+            else if(RodarEvento && Evento == 4){
+                StartCoroutine(Evento4_Pt2());
+                player.AndarPlayer();
+                Evento++;
+            }
+            else{
+
             }
         }
         else
@@ -191,17 +216,51 @@ public class Capitulo_1 : BaseCapitulo {
     #endregion
     #region CutScene/Configurações Parte_2
 
+
     private IEnumerator Evento1_Pt2(){
-        if(!hud_TelaPreta.activeSelf){
-        telaPreta.SetTrigger("fadeOut");
+
+        if(Parte != 2){
+            telaPreta.SetTrigger("fadeOut");
         }
+        SetarPosicao(objeto_Player, -6f, -1.5f);
+        player.TrocarEstado("Jovem");
+        MudarCenario("Bedroom");
+
         yield return new WaitForSeconds(1f);
         InicioDatilografia("Fala7", 1);
+
     }
-    //Abertura do Jogo;
+
     private IEnumerator Evento2_Pt2(){
+         
+        yield return new WaitForSeconds(0.3f);
+        introText.text = "Alguns anos depois...";
+        introCapitulo.SetTrigger("fadeIn");
+
+        yield return new WaitForSeconds (3f);
+        introCapitulo.SetTrigger("fadeOut");
+
         yield return new WaitForSeconds(1f);
-        
+        telaPreta.SetTrigger("fadeIn");
+
+        RodarEvento = true;
+        RodarParte = true;
+    }
+    private IEnumerator Evento3_Pt2(){
+
+        telaPreta.SetTrigger("fadeIn");
+        yield return new WaitForSeconds(1f);
+        Datilografia("Fala8", 1);
+    }
+    private IEnumerator Evento4_Pt2(){
+        telaPreta.SetTrigger("fadeOut");
+        yield return new WaitForSeconds(1f);
+        MudarCenario("School");
+
+        SetarPosicao(objeto_Player, 6f, -1.5f);
+        yield return new WaitForSeconds(0.2f);
+        telaPreta.SetTrigger("fadeIn");
+
     }
 
     #endregion

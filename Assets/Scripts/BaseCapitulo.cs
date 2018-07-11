@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BaseCapitulo : MonoBehaviour {
 
@@ -26,10 +27,12 @@ public class BaseCapitulo : MonoBehaviour {
 
     //Animações;
     public Animator telaPreta;
+    public Animator introCapitulo;
 
     //cenários;
     public GameObject bedroom;
     public GameObject redroom;
+    public GameObject school;
 
     //ativar/desabilitar objetos do hud;
     public GameObject hud_Dialogo;
@@ -38,6 +41,10 @@ public class BaseCapitulo : MonoBehaviour {
     public GameObject hud_Escolhas;
     public GameObject hud_TelaPreta;
     public GameObject hud_Tempo;
+    public GameObject hud_IntroducaoCapitulo;
+
+    //Text;
+    public Text introText;
 
     #endregion
 
@@ -77,11 +84,18 @@ public class BaseCapitulo : MonoBehaviour {
         {
             bedroom.SetActive(true);
             redroom.SetActive(false);
+            school.SetActive(false);
         }
         else if (nomeCenario == "Redroom")
         {
             bedroom.SetActive(false);
             redroom.SetActive(true);
+            school.SetActive(false);
+        }
+        else if(nomeCenario == "School"){
+            bedroom.SetActive(false);
+            redroom.SetActive(false);
+            school.SetActive(true);
         }
     }
     public void SetarPosicao(GameObject objeto, float posX, float posY)
