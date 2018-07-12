@@ -76,7 +76,7 @@ public class Capitulo_1 : BaseCapitulo {
             }
             else if(RodarEvento && Evento == 7){
                 hud_Escolhas.SetActive(true);
-                script_Escolha.SetarEscolhas("Sair", "Não Sair");
+                script_Escolha.SetarEscolhas("Sair", 50, "Não Sair", 45, 300, 100, 300, 100);
                 Evento++;
             }
             else if(RodarEvento && Evento == 8 && EscolhaAtual == 1){
@@ -142,7 +142,15 @@ public class Capitulo_1 : BaseCapitulo {
             }
             else if(RodarEvento && Evento == 7){
                 Datilografia("Fala10", 1);
-                Evento++;
+                Evento = 8;
+            }
+            else if(RodarEvento && Evento == 8){
+                hud_Escolhas.SetActive(true);
+                script_Escolha.SetarEscolhas("As pessoas comentam...", 32, "Você sabe que eu\n namoro com ela", 30, 500, 100, 500, 100);
+                Evento = 0;
+            }
+            else if(RodarEvento && Evento == 9 && EscolhaAtual == 1){
+
             }
             else{
 

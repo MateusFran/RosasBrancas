@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class Choices : MonoBehaviour {
 
-    [SerializeField] private Button butaoEsquerda;
-    [SerializeField] private Button butaoDireita;
+    [SerializeField] private RectTransform butaoEsquerda;
+    [SerializeField] private RectTransform butaoDireita;
     [SerializeField] private Text textoButaoEsquerda;
     [SerializeField] private Text textoButaoDireita;
     [SerializeField] private GameObject hud;
@@ -21,14 +21,19 @@ public class Choices : MonoBehaviour {
         textoButaoEsquerda.text = escolhaEsquerda;
         textoButaoDireita.text = escolhaDireita;
     }
-    public void SetarEscolhas(string escolhaEsquerda, string escolhaDireita, float tamEsquerda, float tamDireita)
+    public void SetarEscolhas(string escolhaEsquerda, int fonteEsquerda, string escolhaDireita, int fontDireita, float tamEsquerdaW, float tamEsquerdaH, float tamDireitaW, float tamDireitaH)
     {
         hud_TelaPreta.SetActive(false);
 
         textoButaoEsquerda.text = escolhaEsquerda;
         textoButaoDireita.text = escolhaDireita;
+
+        textoButaoEsquerda.fontSize = fonteEsquerda;
+        textoButaoDireita.fontSize = fontDireita;
         
         //Lembrar de setar tamanho do botão tambem;
+        butaoDireita.sizeDelta = new Vector2(tamDireitaW, tamDireitaH);
+        butaoEsquerda.sizeDelta = new Vector2(tamEsquerdaW, tamEsquerdaH);
     }
 
 	public void EscolhaEsquerda(){

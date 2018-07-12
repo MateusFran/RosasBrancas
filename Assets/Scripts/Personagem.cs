@@ -27,7 +27,6 @@ public class Personagem : MonoBehaviour {
     [SerializeField] private float tempo;
     private bool podeMover;
     private float direcao;
-
     private bool verificarEvento;
 	// Use this for initialization
 	void Start () {
