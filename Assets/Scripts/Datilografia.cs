@@ -17,6 +17,8 @@ public class Datilografia : MonoBehaviour {
 	[SerializeField]
 	private float delay;
 	public GameObject hud;
+	public Image imagem_Personagem;
+	public Image imagem_Dialogo;
 	public bool nomepersonagem = true, 
 				pulardelay = false, 
 				controle_space = false, 
@@ -38,6 +40,26 @@ public class Datilografia : MonoBehaviour {
 			if (controle_space) {
 				pulardelay = true;
 			}
+		}
+		switch(capitulo1.cenarioAtual){
+			case "Bedroom":
+				imagem_Dialogo.color = new Vector4(0.1041296f, 0.1047862f, 0.3396226f, 1f);
+				imagem_Personagem.color = new Vector4(0.1041296f, 0.1047862f, 0.3396226f, 1f);
+				break;
+
+			case "Redroom":
+				imagem_Dialogo.color = new Vector4(0.3679245f, 0.116278f, 0.116278f, 1f);
+				imagem_Personagem.color = new Vector4(0.3679245f, 0.116278f, 0.116278f, 1f);
+				break;
+
+			case "School":
+				imagem_Dialogo.color = new Vector4(0.6313726f, 0.6313726f, 0.6313726f, 1f);
+				imagem_Personagem.color = new Vector4(0.6313726f, 0.6313726f, 0.6313726f, 1f);
+				break;
+
+			default:
+			//Sem Cenário
+				break;
 		}
 	}
 

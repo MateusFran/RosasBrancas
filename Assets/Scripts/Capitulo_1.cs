@@ -35,8 +35,6 @@ public class Capitulo_1 : BaseCapitulo {
         VerificarTodosObjetos();
         mostrarParte = parte;
 
-        print(Evento);
-
         EscolhaAtual =  PlayerPrefs.GetInt("escolha");
 
         if (RodarParte && Parte == 1)
@@ -102,6 +100,7 @@ public class Capitulo_1 : BaseCapitulo {
             RodarEvento = false;
         }
         else if(RodarParte && Parte == 2){
+
             if(RodarEvento && Evento == 0){
                 //Evento Vazio;
             }
@@ -109,7 +108,8 @@ public class Capitulo_1 : BaseCapitulo {
                 
                 hud_TelaPreta.SetActive(true);
                 hud_TelaPreta.SetActive(true);
-                
+
+                player.cenaObjetos = 1;
                 player.ResetarVezesVasculhou("Bedroom", 1);
                 player.ResetarVezesVasculhou("Redroom", 2);
 
@@ -130,6 +130,18 @@ public class Capitulo_1 : BaseCapitulo {
             else if(RodarEvento && Evento == 4){
                 StartCoroutine(Evento4_Pt2());
                 player.AndarPlayer();
+                Evento = 0;
+            }
+            else if(RodarEvento && Evento == 5){
+                personagem.Mover("Raquel", 4f, true, 2.5f);
+                Evento = 0;
+            }
+            else if(RodarEvento && Evento == 6){
+                personagem.Mover("Harvey", 4f, false, 3.5f);
+                Evento = 7;
+            }
+            else if(RodarEvento && Evento == 7){
+                Datilografia("Fala10", 1);
                 Evento++;
             }
             else{
@@ -219,18 +231,20 @@ public class Capitulo_1 : BaseCapitulo {
 
     private IEnumerator Evento1_Pt2(){
 
-        if(Parte != 2){
-            telaPreta.SetTrigger("fadeOut");
-        }
+        
+        telaPreta.SetTrigger("fadeOut");
+        yield return new WaitForSeconds(2f);
+
+        objeto_Player.SetActive(true);
         SetarPosicao(objeto_Player, -6f, -1.5f);
+        player.PararPlayer();
         player.TrocarEstado("Jovem");
         MudarCenario("Bedroom");
+        personagem.RemoverCena("Pai");
 
         yield return new WaitForSeconds(1f);
         InicioDatilografia("Fala7", 1);
-
     }
-
     private IEnumerator Evento2_Pt2(){
          
         yield return new WaitForSeconds(0.3f);
@@ -256,11 +270,15 @@ public class Capitulo_1 : BaseCapitulo {
         telaPreta.SetTrigger("fadeOut");
         yield return new WaitForSeconds(1f);
         MudarCenario("School");
-
+        player.cenaObjetos = 1;
         SetarPosicao(objeto_Player, 6f, -1.5f);
+        personagem.Chamar("NPC1", -3f, -1.5f);
+        personagem.Chamar("NPC2", -1f, -1.5f);
         yield return new WaitForSeconds(0.2f);
         telaPreta.SetTrigger("fadeIn");
-
+        yield return new WaitForSeconds(1f);
+        Datilografia("Fala9", 1);
+        player.AndarPlayer();
     }
 
     #endregion

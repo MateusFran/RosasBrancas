@@ -23,6 +23,9 @@ public class Player : MonoBehaviour {
     [SerializeField] private SpriteRenderer spriteRendCrianca;
     [SerializeField] private SpriteRenderer spriteRendJovem;
 
+    [SerializeField] private GameObject Jovem_Player;
+    [SerializeField] private GameObject Crianca_Player;
+
     //variaveis de vez dos objetos;
     public int armarioVez,
                 portaBedroomVez,
@@ -34,6 +37,10 @@ public class Player : MonoBehaviour {
                cameraVez,
                quadroVez;
 
+    public int npc1Vez, 
+               npc2Vez;
+
+    public int raquelVez;
 
     //variaveis tecla E;
     public Image imagemTecla;
@@ -106,6 +113,9 @@ public class Player : MonoBehaviour {
 				flip ();
 		}
     }
+    public void FazerFlip(){
+        flip();
+    }
     private void flip()
     {
         facingright = !facingright;
@@ -157,7 +167,7 @@ public class Player : MonoBehaviour {
 
         #region Objetos Do Bedroom
         //if da tecla E;
-        if (coll.gameObject.tag != "Floor")
+        if (coll.gameObject.tag != "Floor" && coll.gameObject.tag != "Longe")
 			vasculhando = true;
 
 		//objetos;
@@ -388,8 +398,65 @@ public class Player : MonoBehaviour {
 
         #endregion
     
+        #region Objetos Da School
+        
+        else if (coll.gameObject.tag == "NPC1" || coll.gameObject.tag == "NPC2")
+        {
+            if (apertarTeclaE && vasculhando)
+            {
+                if ((npc1Vez == 0 || npc2Vez == 0) && cenaObjetos == 1)
+                {
+                    hudDialogo.SetActive(true);
+
+                    objetoDatilografia.Digitando("Dialogo\\Personagens\\NPC\\1_Vez.txt");
+                    npc1Vez++;
+                    npc2Vez++;
+
+                }
+                else
+                {
+                    hudDialogo.SetActive(true);
+                    objetoDatilografia.Digitando("Dialogo\\Personagens\\NPC\\Falou.txt");
+                }
+
+            }//fim verificação da tecla;
+        }//fim NPCs;
+        else if(coll.gameObject.tag == "Raquel"){
+            if (apertarTeclaE && vasculhando)
+            {
+                if (raquelVez == 0 && cenaObjetos == 1)
+                {
+                    hudDialogo.SetActive(true);
+
+                    objetoDatilografia.Digitando("Dialogo\\Personagens\\Raquel\\1_Vez.txt");
+                    raquelVez++;
+                    capitulo1.Evento = 6;
+                }
+                else
+                {
+                    hudDialogo.SetActive(true);
+                    objetoDatilografia.Digitando("Dialogo\\Personagens\\NPC\\Falou.txt");
+                }
+
+            }//fim verificação da tecla;
+        }//fim Raquel;
+        
+        #endregion
     }//fim Trigger;
 
+    void OnTriggerEnter2D(Collider2D coll) {
+        if(coll.gameObject.tag == "Longe"){
+            if((npc1Vez == 1 || npc2Vez == 1) && cenaObjetos == 1){
+
+                hudDialogo.SetActive(true);
+                objetoDatilografia.Digitando("Dialogo\\Personagens\\NPC\\2_Vez.txt");
+                npc1Vez++;
+                npc2Vez++;
+                capitulo1.Evento = 5;
+            }
+        } 
+        print("Enter");   
+    }
     void OnTriggerExit2D(Collider2D coll)
 	{
 		//if da tecla E;
@@ -406,6 +473,8 @@ public class Player : MonoBehaviour {
         if (!datilografia.acabouFala || !inicioDatilografia.acabouFala || !objetoDatilografia.acabouFala || !podeMover) {
             speed = 0;
 		    mover = false;
+            animacao.SetFloat ("Andando_Player", Mathf.Abs (speed));
+            animacaoJovem.SetFloat("Andando_Player", Mathf.Abs(speed));
             print("Parar");
         }
         else {
@@ -462,6 +531,9 @@ public class Player : MonoBehaviour {
     }
 
     public void TrocarEstado(string nomeEstado){
+
+        Jovem_Player.SetActive(true);
+        Crianca_Player.SetActive(true);
 
         if(nomeEstado == "Crianca"){
             spriteRendCrianca.enabled = true;

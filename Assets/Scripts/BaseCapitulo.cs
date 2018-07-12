@@ -10,6 +10,7 @@ public class BaseCapitulo : MonoBehaviour {
     public bool RodarCapitulo{ get; set;}
     public int Capitulo{ get; set;}
 
+    public string cenarioAtual;
     //Player;
     public Player player;
     public GameObject objeto_Player;
@@ -82,17 +83,20 @@ public class BaseCapitulo : MonoBehaviour {
 
         if (nomeCenario == "Bedroom")
         {
+            cenarioAtual = "Bedroom";
             bedroom.SetActive(true);
             redroom.SetActive(false);
             school.SetActive(false);
         }
         else if (nomeCenario == "Redroom")
         {
+            cenarioAtual = "Redroom";
             bedroom.SetActive(false);
             redroom.SetActive(true);
             school.SetActive(false);
         }
         else if(nomeCenario == "School"){
+            cenarioAtual = "School";
             bedroom.SetActive(false);
             redroom.SetActive(false);
             school.SetActive(true);
