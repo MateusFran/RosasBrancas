@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BaseCapitulo : MonoBehaviour {
 
@@ -77,6 +78,10 @@ public class BaseCapitulo : MonoBehaviour {
 
     #region Funções Importantes
 
+    public void TrocarCena(string nomeCena){
+        SceneManager.LoadScene(nomeCena);
+    }
+    
     public void MudarCenario(string nomeCenario)
     {
         //hudTelaPreta.SetActive(true);
@@ -114,14 +119,14 @@ public class BaseCapitulo : MonoBehaviour {
     {
         hud_DialogoInicial.SetActive(true);
         if(capitulo == 1){
-        inicioDatilografia.Digitando("Dialogo\\Capitulo1\\" + arquivo + ".txt");
+            inicioDatilografia.Digitando("Dialogo\\Capitulo1\\" + arquivo + ".txt");
         }
     }
     public void Datilografia(string arquivo, int capitulo)
     {
         hud_Dialogo.SetActive(true);
         if(capitulo == 1){
-        datilografia.Digitando("Dialogo\\Capitulo1\\" + arquivo + ".txt");
+            datilografia.Digitando("Dialogo\\Capitulo1\\" + arquivo + ".txt");
         }
     }
     #endregion

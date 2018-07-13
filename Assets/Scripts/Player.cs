@@ -398,6 +398,7 @@ public class Player : MonoBehaviour {
 
         #endregion
     
+
         #region Objetos Da School
         
         else if (coll.gameObject.tag == "NPC1" || coll.gameObject.tag == "NPC2")
@@ -434,8 +435,8 @@ public class Player : MonoBehaviour {
                 }
                 else
                 {
-                    hudDialogo.SetActive(true);
-                    objetoDatilografia.Digitando("Dialogo\\Personagens\\NPC\\Falou.txt");
+                    //hudDialogo.SetActive(true);
+                    //objetoDatilografia.Digitando("Dialogo\\Personagens\\NPC\\Falou.txt");
                 }
 
             }//fim verificação da tecla;

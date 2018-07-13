@@ -13,9 +13,15 @@ public class Capitulo_1 : BaseCapitulo {
     public int Parte { get; set; }
     public int EscolhaAtual{ get; set; }
     
+    public int EscolhasCertas{ get; set;}
+    public int EscolhasErradas{ get; set;}
+
     private void Start()
     {
         //PlayerPrefs;
+        EscolhasCertas = 0;
+        EscolhasErradas = 0;
+
         PlayerPrefs.SetInt("escolha", 0);
     }
 
@@ -106,6 +112,7 @@ public class Capitulo_1 : BaseCapitulo {
             }
             else if(RodarEvento && Evento == 1){
                 
+                player.PararPlayer();
                 hud_TelaPreta.SetActive(true);
                 hud_TelaPreta.SetActive(true);
 
@@ -137,6 +144,7 @@ public class Capitulo_1 : BaseCapitulo {
                 Evento = 0;
             }
             else if(RodarEvento && Evento == 6){
+                player.PararPlayer();
                 personagem.Mover("Harvey", 4f, false, 3.5f);
                 Evento = 7;
             }
@@ -147,10 +155,68 @@ public class Capitulo_1 : BaseCapitulo {
             else if(RodarEvento && Evento == 8){
                 hud_Escolhas.SetActive(true);
                 script_Escolha.SetarEscolhas("As pessoas comentam...", 32, "Você sabe que eu\n namoro com ela", 30, 500, 100, 500, 100);
-                Evento = 0;
+                Evento = 9;
             }
             else if(RodarEvento && Evento == 9 && EscolhaAtual == 1){
 
+                EscolhasCertas++;
+                Datilografia("Fala11_Esc1", 1);
+                Evento = 10;
+            }
+            else if(RodarEvento && Evento == 9 && EscolhaAtual == 2){
+
+                EscolhasErradas++;
+                Datilografia("Fala11_Esc2", 1);
+                Evento = 10;
+            }
+            else if(RodarEvento && Evento == 10){
+                hud_Escolhas.SetActive(true);
+                script_Escolha.SetarEscolhas("Eu realmente me\npreocupo com ela", 32, "Você realmente se\n preocupa com ela", 30, 500, 100, 500, 100);
+                Evento = 11;
+            }
+            else if(RodarEvento && Evento == 11 && EscolhaAtual == 1){
+
+                EscolhasErradas++;
+                Datilografia("Fala12_Esc1", 1);
+                Evento = 12;
+            }
+            else if(RodarEvento && Evento == 11 && EscolhaAtual == 2){
+
+                EscolhasCertas++;
+                Datilografia("Fala12_Esc2", 1);
+                Evento = 12;
+            }
+            else if(RodarEvento && Evento == 12){
+                hud_Escolhas.SetActive(true);
+                script_Escolha.SetarEscolhas("Eu preciso da sua ajuda", 32, "Eu não preciso da \nsua ajuda", 30, 500, 100, 500, 100);
+                Evento = 13;
+            }
+            else if(RodarEvento && Evento == 13 && EscolhaAtual == 1){
+
+                EscolhasCertas++;
+                Datilografia("Fala13_Esc1", 1);
+                Evento = 14;
+            }
+            else if(RodarEvento && Evento == 13 && EscolhaAtual == 2){
+
+                EscolhasErradas++;
+                Datilografia("Fala13_Esc2", 1);
+                Evento = 14;
+            }
+            else if(RodarEvento && Evento == 14 && EscolhasCertas >= 2){
+                Datilografia("Fala14_Certa", 1);
+                Evento = 15;
+            }
+            else if(RodarEvento && Evento == 14 && EscolhasCertas < 2){
+                Datilografia("Fala14_Errada", 1);
+                Evento = 15;
+            }
+            else if(RodarEvento && Evento == 15){
+                StartCoroutine(Evento15_Pt2());
+                Evento = 16;
+            }
+            else if(RodarEvento && Evento == 16){
+                TrocarCena("FinalCredits");
             }
             else{
 
@@ -178,8 +244,8 @@ public class Capitulo_1 : BaseCapitulo {
             hud_Tutorial.SetActive(true);
         }
     }
-
     #endregion
+
     #region CutScene/Configurações Parte_1
 
     private IEnumerator Evento2(){
@@ -236,7 +302,6 @@ public class Capitulo_1 : BaseCapitulo {
     #endregion
     #region CutScene/Configurações Parte_2
 
-
     private IEnumerator Evento1_Pt2(){
 
         
@@ -287,6 +352,12 @@ public class Capitulo_1 : BaseCapitulo {
         yield return new WaitForSeconds(1f);
         Datilografia("Fala9", 1);
         player.AndarPlayer();
+    }
+    private IEnumerator Evento15_Pt2(){
+
+        telaPreta.SetTrigger("fadeOut");
+        yield return new WaitForSeconds(1.5f);
+        InicioDatilografia("Fala15", 1);
     }
 
     #endregion

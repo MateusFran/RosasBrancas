@@ -15,6 +15,7 @@ public class Choices : MonoBehaviour {
 
     //Capítulos:
     [SerializeField] private Capitulo_1 capitulo1;
+    [SerializeField] private SaveData saveData;
     public void SetarEscolhas(string escolhaEsquerda, string escolhaDireita)
     {
         hud_TelaPreta.SetActive(false);
@@ -43,6 +44,8 @@ public class Choices : MonoBehaviour {
         hud.SetActive(false);
         hud_TelaPreta.SetActive(true);
 
+        saveData.SalvarEscolhas();
+
         capitulo1.RodarEvento = true;
         capitulo1.RodarParte = true;
 	}
@@ -52,6 +55,8 @@ public class Choices : MonoBehaviour {
 
         hud.SetActive(false);
         hud_TelaPreta.SetActive(true);
+
+        saveData.SalvarEscolhas();
 
         capitulo1.RodarEvento = true;
         capitulo1.RodarParte = true;

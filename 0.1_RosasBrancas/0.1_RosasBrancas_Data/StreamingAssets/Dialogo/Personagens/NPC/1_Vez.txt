@@ -1,0 +1,6 @@
+Pessoa 1/Jonas, Quanto Tempo@
+Pessoa 2/Oi Jonas, tudo bem?@
+Pessoa 1/Não liga pro que tão falando de você não.@
+Pessoa 2/É, com certeza uma pessoa como você não faria algo assim.@
+Pessoa 1/Com certeza é mentira@
+Pessoa 2/É, com certeza.
