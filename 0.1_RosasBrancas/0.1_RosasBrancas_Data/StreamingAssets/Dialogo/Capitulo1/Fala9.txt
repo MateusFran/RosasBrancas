@@ -1,7 +1,0 @@
- /*Jonas Escuta duas pessoas falando no corredor*@
-Pessoa 1/Quê? É sério que ele fez aquilo?@
-Pessoa 2/Sim, parece que ele faz isso todos os dias, é muito estranho.@
-Pessoa 1/Nossa, eu não sei como que ele teve coragem de fazer isso.@
-Pessoa 2/Coitada dela, pobrezinha…@
-Pessoa 1/Cuidado, eu acho que é ele ali, shhh.@
-Jonas/Peraí, eles estão falando de mim?
