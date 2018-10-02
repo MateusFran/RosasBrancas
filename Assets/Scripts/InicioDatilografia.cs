@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class InicioDatilografia : MonoBehaviour {
 	
@@ -34,7 +35,7 @@ public class InicioDatilografia : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKeyDown (KeyCode.Space)) {
+		if (CrossPlatformInputManager.GetButtonDown("Jump")) {
 			if (controle_space) {
 				pulardelay = true;
 			}

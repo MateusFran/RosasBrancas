@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class Player : MonoBehaviour {
     
@@ -102,7 +103,7 @@ public class Player : MonoBehaviour {
     */
     private void FixedUpdate()
     {
-		float move = Input.GetAxisRaw ("Horizontal");
+		float move = CrossPlatformInputManager.GetAxisRaw ("Horizontal");
 		rb.velocity = new Vector2 (move * speed, rb.velocity.y);
 		if (mover) {
 			animacao.SetFloat ("Andando_Player", Mathf.Abs (move));
