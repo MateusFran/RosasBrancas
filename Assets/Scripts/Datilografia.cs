@@ -37,7 +37,7 @@ public class Datilografia : MonoBehaviour {
 
 	void Update () {
 
-		if (CrossPlatformInputManager.GetButtonDown("Jump")) {
+		if (Input.GetKeyDown(KeyCode.Space)) {
 			if (controle_space) {
 				pulardelay = true;
 			}

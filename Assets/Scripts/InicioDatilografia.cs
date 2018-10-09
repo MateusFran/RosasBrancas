@@ -35,7 +35,7 @@ public class InicioDatilografia : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (CrossPlatformInputManager.GetButtonDown("Jump")) {
+		if (Input.GetKeyDown(KeyCode.Space)) {
 			if (controle_space) {
 				pulardelay = true;
 			}
@@ -78,7 +78,7 @@ public class InicioDatilografia : MonoBehaviour {
 				}
 			}
 			yield return new WaitForSeconds (0.1f);
-
+			
 			while (Input.GetKeyDown (KeyCode.Space) == false) {
 				controle_space = false;
 				yield return new WaitForSeconds (0.005f);

@@ -103,7 +103,7 @@ public class Player : MonoBehaviour {
     */
     private void FixedUpdate()
     {
-		float move = CrossPlatformInputManager.GetAxisRaw ("Horizontal");
+		float move = Input.GetAxisRaw ("Horizontal");
 		rb.velocity = new Vector2 (move * speed, rb.velocity.y);
 		if (mover) {
 			animacao.SetFloat ("Andando_Player", Mathf.Abs (move));
