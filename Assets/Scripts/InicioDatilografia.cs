@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
-using UnityStandardAssets.CrossPlatformInput;
 
 public class InicioDatilografia : MonoBehaviour {
 	

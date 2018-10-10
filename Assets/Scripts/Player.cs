@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityStandardAssets.CrossPlatformInput;
 
 public class Player : MonoBehaviour {
     
@@ -132,22 +131,6 @@ public class Player : MonoBehaviour {
 
     public void VasculharTodosObjetos(string cenario, int vez)
     {
-        /*
-        objetos Bedroom:
-
-        * portaRedroom
-        * camera
-        * quadro
-        * mesa
-
-        objetos Redroom:
-
-        *mesa
-        *portaBedroom
-        *camera
-        *quadro
-
-        */
 
         if (cenario == "Bedroom")
         {
@@ -233,35 +216,6 @@ public class Player : MonoBehaviour {
 					objetoDatilografia.Digitando("Dialogo\\Objetos\\Vasculhou.txt");
 				}
                 
-			}//fim verificação da tecla;
-		}//fim Relogio;
-
-		else if(coll.gameObject.tag == "PortaBedroom"){
-        
-			if (apertarTeclaE && vasculhando) {
-                
-                if ((portaBedroomVez == 0 || portaBedroomVez == 1) && cenaObjetos == 0 && PlayerPrefs.GetInt("chave") == 1) {
-					hudDialogo.SetActive (true);
-
-					objetoDatilografia.Digitando("Dialogo\\Objetos\\PortaBedroom\\1_VezChave.txt");
-					portaBedroomVez++;
-                    
-                    capitulo1.Evento = 4;
-                    
-                    
-                    PlayerPrefs.SetInt("chave", 0);
-                    
-				}
-				else if (portaBedroomVez == 0 && cenaObjetos == 0 && PlayerPrefs.GetInt("chave") == 0) {
-					hudDialogo.SetActive (true);
-					objetoDatilografia.Digitando("Dialogo\\Objetos\\PortaBedroom\\1_Vez.txt");
-					portaBedroomVez++;
-				}
-				else {
-					hudDialogo.SetActive (true);
-					objetoDatilografia.Digitando("Dialogo\\Objetos\\Vasculhou.txt");
-				}
-
 			}//fim verificação da tecla;
 		}//fim Relogio;
 
@@ -442,7 +396,7 @@ public class Player : MonoBehaviour {
 
             }//fim verificação da tecla;
         }//fim Raquel;
-        
+        podeApertarE = false;
         #endregion
     }//fim Trigger;
 
@@ -526,9 +480,6 @@ public class Player : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.E) && podeApertarE == true){
             apertarTeclaE = true;
-        }
-        else{
-            apertarTeclaE = false;
         }
     }
 
