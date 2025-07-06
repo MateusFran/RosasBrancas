@@ -22,12 +22,10 @@ O jogador vivencia os acontecimentos pela perspectiva do namorado, tentando comp
 
 | Tela | Descrição |
 |------|-----------|
-| ![Tela 1](./assets/tela1.png) | Tela inicial com título e atmosfera melancólica |
-| ![Tela 2](./assets/tela2.png) | Diálogo entre o protagonista e um personagem secundário |
-| ![Tela 3](./assets/tela3.png) | Sistema de escolhas afetando a narrativa |
-| ![Tela 4](./assets/tela4.png) | Cena emocional que revela uma reviravolta na história |
-
-> *(Substitua os caminhos das imagens conforme necessário)*
+| ![Tela 1](./Assets/Readme/cena01-jogo.png) | Primeiro ato com personagem localizado na casa |
+| ![Tela 2](./Assets/Readme/cena02-jogo.png) | Personagem em outro local da história |
+| ![Tela 3](./Assets/Readme/cenaEscolha01-jogo.png) | Sistema de escolhas afetando a narrativa |
+| ![Tela 4](./Assets/Readme/cena03-jogo.png) | Cena final do primeiro ato |
 
 ## 👥 Créditos
 
